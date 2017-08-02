@@ -1,5 +1,7 @@
 package com.sm.system.security;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -14,6 +16,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 @EnableGlobalMethodSecurity(prePostEnabled = true)//允许进入页面方法前检验
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+	private final Logger log = LoggerFactory.getLogger(getClass());
+	
     @Autowired
     private MyAuthenticationProvider provider;//自定义验证
     @Autowired
@@ -25,6 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+    	log.debug("web security config redirect");
         http.authorizeRequests()
 
 //        .antMatchers(StaticParams.PATHREGX.NOAUTH, 

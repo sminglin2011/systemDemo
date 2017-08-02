@@ -2,6 +2,8 @@ package com.sm.system.security;
 
 import java.util.Collection;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -17,6 +19,8 @@ import com.sm.system.service.user.MyUserDetailsService;
 @Component
 public class MyAuthenticationProvider implements AuthenticationProvider {
 
+	private final Logger log = LoggerFactory.getLogger(getClass());
+	
     @Autowired
     private MyUserDetailsService userService;
 
@@ -25,6 +29,7 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
      */
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+    	log.debug("自定义验证方式");
         String username = authentication.getName();
         String password = (String) authentication.getCredentials();
         MyUserDetails user = (MyUserDetails) userService.loadUserByUsername(username);

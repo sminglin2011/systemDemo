@@ -12,13 +12,14 @@ import org.springframework.web.servlet.ModelAndView;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-	Logger log = LoggerFactory.getLogger(getClass());
+	private final Logger log = LoggerFactory.getLogger(getClass());
 	
     public static final String DEFAULT_ERROR_VIEW = "error";
 
     @ExceptionHandler(value = Exception.class)
     public ModelAndView defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {
     	log.error("error.log<><><><>" + e.getMessage());
+    	System.out.println("System out print <><M<<><><><><><");
         ModelAndView mav = new ModelAndView();
         mav.addObject("exception", e.getMessage());
         mav.addObject("url", req.getRequestURL());
