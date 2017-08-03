@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"></meta>
+<meta name="renderer" content="webkit|ie-comp|ie-stand"></meta>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"></meta>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"></meta>
+<meta http-equiv="Cache-Control" content="no-siteapp"></meta>
+<link rel="Bookmark" href="/H-ui-admin-v3/favicon.ico" />
+<link rel="Shortcut Icon" href="/H-ui-admin-v3/favicon.ico" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="/H-ui-admin-v3/lib/html5shiv.js"></script>
+<script type="text/javascript" src="/H-ui-admin-v3/lib/respond.min.js"></script>
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="/H-ui-admin-v3/static/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="/H-ui-admin-v3/static/h-ui.admin/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css" href="/H-ui-admin-v3/lib/Hui-iconfont/1.0.8/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="/H-ui-admin-v3/static/h-ui.admin/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css" href="/H-ui-admin-v3/static/h-ui.admin/css/style.css" />
+<!--[if IE 6]>
+<script type="text/javascript" src="/H-ui-admin-v3/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+<title></title>
+</head>
+<body>
+<div class="page-container">
+	<div class="text-c">
+	</div>
+	<div class="mt-20">
+		<table id="table" class="table table-border table-bordered table-bg table-hover table-sort table-responsive">
+			<thead>
+				<tr class="text-c">
+					<th width="25"><input id="checkAll" type="checkbox" name="" value=""></input></th>
+					<th width="30">ID</th>
+					<th>Name</th>
+					<th>Attention</th>
+					<th>Mobile</th>
+					<th>Telephone</th>
+					<th>Fax</th>
+					<th>Email</th>
+					<th width="120">Operation</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="text-c" th:each="customer,iterStat : ${customerList}"> 
+				     <td><input type="checkbox" th:value="${customer.customerId}" name="customerId"></input></td>
+				     <td id="id" th:text="${customer.customerId}">id</td>
+				     <td id="name" th:text="${customer.name}">name</td>
+				     <td id="attention" th:text="${customer.attention}">Attention</td>
+				     <td id="mobile" th:text="${customer.mobile}">mobile</td>
+				     <td th:text="${customer.telephone}">telephone</td>
+				     <td th:text="${customer.fax}">fax</td>
+				     <td th:text="${customer.email}">email</td>
+				     <td class="f-14 td-manage">
+				     <a class="btn btn-primary size-S radius" th:onclick="'javascript:customer_select(this,'+${customer.customerId}+');'" href="javascript:;" title="选择">Select</a>
+				     </td>
+				 </tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="/H-ui-admin-v3/lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="/H-ui-admin-v3/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="/H-ui-admin-v3/static/h-ui/js/H-ui.min.js"></script> 
+<script type="text/javascript" src="/H-ui-admin-v3/static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/H-ui-admin-v3/lib/My97DatePicker/4.8/WdatePicker.js"></script> 
+<script type="text/javascript" src="/H-ui-admin-v3/lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
+<script type="text/javascript" src="/H-ui-admin-v3/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript">
+var table = $('.table-sort').DataTable({
+	"aaSorting": [[ 1, "desc" ]],//默认第几个排序
+	"bStateSave": true,//状态保存
+	"pading":false,
+	"aoColumnDefs": [
+	  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+	  {"orderable":false,"aTargets":[0,8]}// 不参与排序的列
+	]
+});
+
+/* Select */
+function customer_select(obj,id){
+	var $id=$(obj).parents('tr').children('td:nth-child(2)');
+	var $customerName=$(obj).parents('tr').children('td:nth-child(3)');
+	var $attention=$(obj).parents('tr').children('td:nth-child(4)');
+	var $mobile=$(obj).parents('tr').children('td:nth-child(5)');
+	parent.$('#customerId').val($id.html());
+	parent.$('#customerName').val($customerName.html());
+	parent.$('#attention').val($attention.html());
+	parent.$('#mobile').val($mobile.html());
+	layer_close();
+}
+
+</script> 
+</body>
+</html>

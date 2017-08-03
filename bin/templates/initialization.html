@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="renderer" content="webkit|ie-comp|ie-stand"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="Bookmark" href="/favicon.ico" />
+<link rel="Shortcut Icon" href="/favicon.ico" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="H-ui-admin-v3/lib/html5shiv.js"></script>
+<script type="text/javascript" src="H-ui-admin-v3/lib/respond.min.js"></script>
+
+<![endif]-->
+<link href="H-ui-admin-v3/static/h-ui/css/H-ui.min.css" rel="stylesheet" type="text/css" />
+<link href="H-ui-admin-v3/static/h-ui.admin/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
+<link href="H-ui-admin-v3/lib/Hui-iconfont/1.0.8/iconfont.css" rel="stylesheet" type="text/css" />
+
+<!--[if IE 6]>
+<script type="text/javascript" src="H-ui-admin-v3/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+<title>Initialization System</title>
+</head>
+<body>
+<div class="panel panel-primary">
+	<div class="panel-header">Initialization System</div>
+</div>
+<form th:action="@{/initSys}" method="post" class="form form-horizontal" id="init-form">
+<div class="panel panel-default">
+	<div class="panel-header">Company Information</div>
+	<div class="panel-body">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">Company Name：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text radius size-M" name="companyName" autocomplete="off" placeholder="Company Name" />
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">Company Address：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text radius size-M" name="companyAddress" autocomplete="off" placeholder="Company address" />
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">Company Postal：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text radius size-M"  name="companyPostal" placeholder="Company postal" />
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">Company Country：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text radius size-M" name="companyCountry" autocomplete="off" placeholder="Company Country" />
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">Company Tel.：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text radius size-M" name="companyTel" autocomplete="off" placeholder="Company Tel." />
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">Company Fax：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text radius size-Mt" name="companyFax" autocomplete="off" placeholder="Company Fax" />
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-3">Company GST No.：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text radius size-M" name="companyGstNumber" autocomplete="off" placeholder="Company GST Reg. No." />
+			</div>
+		</div>
+		
+		
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+				<input class="btn btn-warning radius" type="submit" value="Initialization" />
+			</div>
+		</div>
+	</div> <!-- panel-body-end -->
+</div>
+</form>
+<script type="text/javascript" src="H-ui-admin-v3/lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="H-ui-admin-v3/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="H-ui-admin-v3/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="H-ui-admin-v3/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="H-ui-admin-v3/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript" src="H-ui-admin-v3/static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="H-ui-admin-v3/static/h-ui.admin/js/H-ui.admin.js"></script> 
+<script type="text/javascript">
+$(function(){
+	
+});
+</script>
+</body>
+</html>

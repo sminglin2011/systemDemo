@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="renderer" content="webkit|ie-comp|ie-stand"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="Bookmark" href="/favicon.ico" />
+<link rel="Shortcut Icon" href="/favicon.ico" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="H-ui-admin-v3/lib/html5shiv.js"></script>
+<script type="text/javascript" src="H-ui-admin-v3/lib/respond.min.js"></script>
+
+<![endif]-->
+<link href="H-ui-admin-v3/static/h-ui/css/H-ui.min.css" rel="stylesheet" type="text/css" />
+<link href="H-ui-admin-v3/static/h-ui.admin/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
+<link href="H-ui-admin-v3/lib/Hui-iconfont/1.0.8/iconfont.css" rel="stylesheet" type="text/css" />
+
+<!--[if IE 6]>
+<script type="text/javascript" src="H-ui-admin-v3/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+<title>空白页</title>
+</head>
+<body>
+<div id="tab_demo" class="HuiTab">
+  <div class="tabBar clearfix"><span>选项卡一</span><span>选项卡二</span><span>自适应宽度</span></div>
+  <div class="tabCon">内容一</div>
+  <div class="tabCon">内容二</div>
+  <div class="tabCon">内容三</div>
+</div>
+<script type="text/javascript" src="H-ui-admin-v3/lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="H-ui-admin-v3/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="H-ui-admin-v3/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="H-ui-admin-v3/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="H-ui-admin-v3/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript" src="H-ui-admin-v3/static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="H-ui-admin-v3/static/h-ui.admin/js/H-ui.admin.js"></script> 
+<script type="text/javascript">
+$(function(){
+	$.Huitab("#tab_demo .tabBar span","#tab_demo .tabCon","current","click","1");
+});
+	// #tab_demo 父级id
+	// #tab_demo .tabBar span 控制条
+	// #tab_demo .tabCon 内容区
+	// click 事件 点击切换，可以换成mousemove 移动鼠标切换
+	// 1	默认第2个tab为当前状态（从0开始）
+</script>
+</body>
+</html>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"></meta>
+<meta name="renderer" content="webkit|ie-comp|ie-stand"></meta>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"></meta>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"></meta>
+<meta http-equiv="Cache-Control" content="no-siteapp"></meta>
+<link rel="Bookmark" href="/H-ui-admin-v3/favicon.ico" />
+<link rel="Shortcut Icon" href="/H-ui-admin-v3/favicon.ico" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="/H-ui-admin-v3/lib/html5shiv.js"></script>
+<script type="text/javascript" src="/H-ui-admin-v3/lib/respond.min.js"></script>
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="/H-ui-admin-v3/static/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="/H-ui-admin-v3/static/h-ui.admin/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css" href="/H-ui-admin-v3/lib/Hui-iconfont/1.0.8/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="/H-ui-admin-v3/static/h-ui.admin/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css" href="/H-ui-admin-v3/static/h-ui.admin/css/style.css" />
+<!--[if IE 6]>
+<script type="text/javascript" src="/H-ui-admin-v3/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+<title>Add TingKat</title>
+</head>
+<body>
+<article class="page-container">
+	<form method="post" class="form form-horizontal" id="form-add-tingkat">
+		<div class="row cl">
+			<div class="formControls col-xs-3 col-sm-3">
+				<input type="hidden" th:field="*{tingkat.orderId}"></input>
+				<input type="hidden" th:field="*{tingkat.status}"></input>
+				<input type="text" class="input-text disabled" readonly="readonly" th:field="*{tingkat.orderNumber}" placeholder="OrderNumber" id="" name=""></input>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-2 col-sm-2"><span class="c-blue">Postal:</span></label>
+			<div class="formControls col-xs-2 col-sm-2">
+				<input type="text" class="input-text" th:field="*{tingkat.postalCode}" placeholder="Postal Code" id="postalCode" name="postalCode"></input>
+			</div>
+			
+			<label class="form-label col-xs-2 col-sm-2"><span class="c-blue">Address:</span></label>
+			<div class="formControls col-xs-2 col-sm-2">
+				<input type="text" class="input-text" th:field="*{tingkat.address}" placeholder="Address" id="address" name="address"></input>
+			</div>
+			
+			<label class="form-label col-xs-1 col-sm-2"><span class="c-blue">Floor<span class="pipe">|</span>Unit:</span></label>
+			<div class="formControls col-xs-1 col-sm-1">
+				<input type="text" class="input-text" th:field="*{tingkat.floor}" placeholder="Floor" id="floor" name="floor"></input>
+			</div>
+			<div class="formControls col-xs-1 col-sm-1">
+				<input type="text" class="input-text" th:field="*{tingkat.unit}" placeholder="Unit" id="unit" name="unit"></input>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-2 col-sm-2">
+				<input type="button" class="btn btn-primary-outline radius" value="Client" onclick="customerSelection();"></input>
+				<input type="hidden" th:field="*{tingkat.customer.customerId}" id="customerId" name="customer.id"></input>
+				
+			</label>
+			<div class="formControls col-xs-2 col-sm-2">
+				<input type="text" class="input-text" th:field="*{tingkat.customerName}" placeholder="Client Name" id="customerName" name="customerName"></input>
+			</div>
+			
+			<label class="form-label col-xs-1 col-sm-2"><span class="c-blue">Attention:</span></label>
+			<div class="formControls col-xs-2 col-sm-2">
+				<input type="text" class="input-text" th:field="*{tingkat.attention}" placeholder="Attention" id="attention" name="attention"></input>
+			</div>
+			
+			<label class="form-label col-xs-1 col-sm-1"><span class="c-blue">Mobile:</span></label>
+			<div class="formControls col-xs-2 col-sm-2">
+				<input type="text" class="input-text" th:field="*{tingkat.mobile}" placeholder="Mobile" id="mobile" name="mobile"></input>
+			</div>
+		</div>
+		<div class="line mt-10"></div>
+		<div class="row cl">
+			<label class="form-label col-xs-2 col-sm-2"><span class="c-blue">Meal Type:</span></label>
+			<div class="formControls col-xs-2 col-sm-2">
+				<span class="select-box">
+				<select class="select" th:field="*{tingkat.mealType}" id="mealType" name="mealType"> <!--  th:remove="all-but-first" -->
+					<option value="">-- select --</option>
+					<option value="lunch">Lunch</option>
+					<option value="dinner">Dinner</option>
+				</select>
+				</span>
+			</div>
+			
+			<label class="form-label col-xs-1 col-sm-1"><span class="c-blue">Packing:</span></label>
+			<div class="formControls col-xs-3 col-sm-3">
+				<div class="radio-box">
+					<input type="radio" id="packMethod1" name="packMethod" value="tingkat" th:field="*{tingkat.packMethod}"></input>
+					<label for="packMethod1"><span class="c-red">TingKat</span></label>
+				</div>
+				<div class="radio-box">
+					<input type="radio" id="packMethod2" name="packMethod" value="box" th:field="*{tingkat.packMethod}"></input>
+					<label for="packMethod2"><span class="c-red">Box</span></label>
+				</div>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-2 col-sm-2 capitalize"><span class="c-blue">Weekdays:</span></label>
+			<div class="formControls col-xs-9 col-sm-9">
+				<div class="skin-minimal weekdays">
+				<input type="hidden" id="weekdays" name="weekdays" th:field="*{tingkat.weekdays}"></input>
+				<div class="check-box">
+					<input type="checkbox" id="monday" value="1"></input>
+					<label for="monday">Monday</label>
+				</div>
+				<div class="check-box">
+					<input type="checkbox" id="tuesday" value="2"></input>
+					<label for="tuesday">Tuesday</label>
+				</div>
+				<div class="check-box">
+					<input type="checkbox" id="wednesday" value="3"></input>
+					<label for="wednesday">Wednesday</label>
+				</div>
+				<div class="check-box">
+					<input type="checkbox" id="thursday" value="4"></input>
+					<label for="thursday">Thursday</label>
+				</div>
+				<div class="check-box">
+					<input type="checkbox" id="friday" value="5"></input>
+					<label for="friday">Friday</label>
+				</div>
+				<div class="check-box">
+					<input type="checkbox" id="staurday" value="6"></input>
+					<label for="staurday">Saturday</label>
+				</div>
+				<div class="check-box">
+					<input type="checkbox" id="sunday" value="0"></input>
+					<label for="sunday">Sunday</label>
+				</div>
+				</div>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-2 col-sm-2"><span class="c-blue">Order Days:</span></label>
+			<div class="formControls col-xs-1 col-sm-1">
+				<input type="text" class="input-text" th:field="*{tingkat.orderDays}" placeholder="20" id="orderDays" name="orderDays"></input>
+			</div>
+			
+			<label class="form-label col-xs-2 col-sm-2"><span class="c-blue">Start Date:</span></label>
+			<div class="formControls col-xs-2 col-sm-2">
+				<input type="text" class="input-text" th:field="*{tingkat.startDate}" onfocus="WdatePicker()" placeholder="2017-09-10" id="startDate" name="startDate"></input>
+			</div>
+			<label class="form-label col-xs-2 col-sm-2" >End Date:</label>
+			<div class="formControls col-xs-2 col-sm-2">
+				<input type="text" class="input-text disabled" disabled="disabled" th:field="*{tingkat.endDate}" placeholder="" id="endDate" name="endDate"></input>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-2 col-sm-2" ></label>
+			<div class="formControls col-xs-9 col-sm-9">
+				<div class="check-box">
+					<input type="checkbox" id="trial" name="trial" th:field="*{tingkat.trial}"></input>
+					<label for="trial"><span class="c-blue">Trial</span></label>
+				</div>
+				<div class="check-box">
+					<input type="checkbox" id="newCustomer" name="newCustomer" th:field="*{tingkat.newCustomer}"></input>
+					<label for="newCustomer"><span class="c-blue">New Client</span></label>
+				</div>
+				<div class="check-box">
+					<input type="checkbox" id="nonContinue" name="nonContinue" th:field="*{tingkat.nonContinue}"></input>
+					<label for="nonContinue"><span class="c-blue">Non Continue</span></label>
+				</div>
+			</div>
+		</div>
+		<div class="line mt-10"></div>
+		<div class="row cl">
+			<label class="form-label col-xs-2 col-sm-2"><span class="c-blue">Menu:</span></label>
+			<div class="formControls col-xs-9 col-sm-9">
+				<div class="radio-box" th:each="menu,iterStat : ${menuList}">
+					<input type="radio" th:value="${menu.menuId}" th:id="'menu'+${menu.menuId}" name="menuName" th:field="${tingkat.productMenu.menuId}"></input>
+					<label th:for="'menu'+${menu.menuId}" th:text="${menu.description}">3 Dish</label>
+				</div>
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-2 col-sm-2"><span class="c-blue">No. Of PAX:</span></label>
+			<div class="formControls col-xs-1 col-sm-1">
+				<input type="text" class="input-text" th:field="*{tingkat.noOfPax}" placeholder="No.Of Pax" id="noOfPax" name="noOfPax"></input>
+			</div>
+			<div class="formControls col-xs-2 col-sm-2">
+				<div class="check-box">
+					<input type="checkbox" id="withRice" name="withRice" th:field="*{tingkat.withRice}"></input>
+					<label for="withRice"><span class="c-blue">With Rice</span></label>
+				</div>
+			</div>
+			
+			<label class="form-label col-xs-2 col-sm-2"><span class="c-blue">UnitPrice Per Pax:</span></label>
+			<div class="formControls col-xs-1 col-sm-1">
+				<input type="text" class="input-text" th:field="*{tingkat.pricePerPax}" placeholder="Unit Price" id="pricePerPax" name="pricePerPax"></input>
+			</div>
+			
+			<label class="form-label col-xs-2 col-sm-2"><span class="c-blue">Amount:</span></label>
+			<div class="formControls col-xs-1 col-sm-1">
+				<input type="text" class="input-text" th:field="*{tingkat.subTotalAmount}" placeholder="" id="amount" name="subTotalAmount"></input>
+			</div>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-2 col-sm-2"><span class="c-blue">Additional Rice:</span></label>
+			<div class="formControls col-xs-1 col-sm-1">
+				<input type="text" class="input-text" th:field="*{tingkat.additionalRice}" placeholder="0" id="additionalRice" name="additionalRice"></input>
+			</div>
+			<div class="formControls col-xs-1 col-sm-1">
+				<input type="text" class="input-text" th:field="*{tingkat.riceAmount}" placeholder="Add. Rice Amount" id="riceAmount" name="riceAmount"></input>
+			</div>
+			
+			<label class="form-label col-xs-2 col-sm-2">Total Amount:</label>
+			<div class="formControls col-xs-1 col-sm-1">
+				<input type="text" class="input-text disabled" disabled="disabled" th:field="*{tingkat.totalAmount}" placeholder="Amount" id="totalAmount" name="totalAmount"></input>
+			</div>
+		</div>
+		
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+				<button class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> SAVE</button>
+				<!--<button onClick="article_save();" class="btn btn-secondary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存草稿</button>-->
+				<button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;CANCEL&nbsp;&nbsp;</button>
+			</div>
+		</div>
+	</form>
+</article>
+
+<!--_footer 作为公共模版分离出去--> 
+<script type="text/javascript" src="/H-ui-admin-v3/lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="/H-ui-admin-v3/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="/H-ui-admin-v3/static/h-ui/js/H-ui.min.js"></script> 
+<script type="text/javascript" src="/H-ui-admin-v3/static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/H-ui-admin-v3/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="/H-ui-admin-v3/lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
+<script type="text/javascript" src="/H-ui-admin-v3/lib/jquery.validation/1.14.0/validate-methods.js"></script> 
+<script type="text/javascript" src="/H-ui-admin-v3/lib/jquery.validation/1.14.0/messages_zh.js"></script> 
+<script type="text/javascript">
+$(document).ready(function(){
+	onLoading();
+	$(".weekdays").find("[type=checkbox]").each(function(i,obj){
+		$(obj).click(function(){
+			console.log($(this).prop("checked"));
+			var weekdays = "";
+			$(".weekdays").find("[type=checkbox]").each(function(i,o){
+				if($(o).prop("checked")){
+					weekdays = weekdays + $(o).val() + ",";
+				}
+			})
+			if(weekdays != "") {weekdays = weekdays.substring(0, weekdays.length-1)}
+			console.log("here weekdays", weekdays);
+			$("#weekdays").val(weekdays);
+		})
+	})
+});
+function onLoading(){
+	var weekdays = $("#weekdays").val();
+	if(weekdays == '') {
+		weekdays = '1,2,3,4,5';
+		$("#weekdays").val(weekdays);
+	}
+	console.log(weekdays.indexOf("0"),"weekdays", (weekdays.indexOf(1)>0), weekdays);
+	if (weekdays.indexOf("1")!= -1) {
+		$('#monday').attr("checked","checked");
+	}
+	if (weekdays.indexOf("2")!= -1) {
+		$('#tuesday').attr("checked","checked");
+	}
+	if (weekdays.indexOf("3")!= -1) {
+		$('#wednesday').attr("checked","checked");
+	}
+	if (weekdays.indexOf("4")!= -1) {
+		$('#thursday').attr("checked","checked");
+	}
+	if (weekdays.indexOf("5")!= -1) {
+		$('#friday').attr("checked","checked");
+	}
+	if (weekdays.indexOf("6")!= -1) {
+		$('#saturday').attr("checked","checked");
+	}
+	if (weekdays.indexOf("0")!= -1) {
+		$('#sunday').attr("checked","checked");
+	}
+}
+function customerSelection(){
+	var customerName = $("#customerName").val();
+	var title = "Customer Selection";
+	var url = "/customer/customerSelection?customerName='" + customerName+"'";
+	layer_show(title,url);
+}
+
+$(function(){
+	
+	$("#form-add-tingkat").validate({
+		rules:{
+			postalCode:{
+				required:true,
+				minlength:6,
+				maxlength:6
+			},
+			customerName:{
+				required:true,
+				maxlength:50
+			},
+			address:{
+				required:true,
+				maxlength:250
+			},
+			mobile:{
+				required:true
+			},
+			mealType:{
+				required:true
+			},
+			packMethod: {
+				required:true
+			},
+			orderDays:{
+				required:true
+			},
+			startDate:{
+				required:true
+			},
+			noOfPax:{
+				required:true
+			},
+		},
+		onkeyup:false,
+		focusCleanup:true,
+		success:"valid",
+		submitHandler:function(form){
+			$(form).ajaxSubmit({
+				type: 'post',
+				url: "saveTingkat" ,
+				dataType: 'json',
+				success: function(data){
+					if(data.result) {
+						layer.msg('添加成功!',{icon:1,time:1000}, function(){
+							parent.$('#btn-refresh').click();
+							layer_close();
+						});
+					} else {
+						layer.msg(data.msg,{icon:2,time:1000});
+					}
+				},
+                error: function(XmlHttpRequest, textStatus, errorThrown){
+                	console.log(textStatus, "textStatus", errorThrown);
+					layer.msg(textStatus,{icon:2,time:5000});
+				}
+			});
+			
+		}
+	});
+});
+</script> 
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

@@ -10,6 +10,21 @@ import javax.persistence.Id;
 @Entity
 public class SystemUser implements Serializable{
 
+	@Override
+	public boolean equals(Object arg0) {
+		return arg0.equals(this.toString());
+	}
+
+	@Override
+	public int hashCode() {
+		return this.getUsername().hashCode();
+	}
+
+	@Override
+	public String toString() {
+		return this.getUsername();
+	}
+
 	/**
 	 * 
 	 */
@@ -19,23 +34,22 @@ public class SystemUser implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private String userName;
+    private String username;
     private String password;
 
     public SystemUser(){}
 
     public SystemUser(SystemUser user){
-        this.userName = user.getUserName();
+        this.username = user.getUsername();
         this.password = user.getPassword();
-        this.id = user.getId();
     }
 
    
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
     public String getPassword() {
         return password;

@@ -36,7 +36,7 @@ public class MyUserDetails extends SystemUser implements UserDetails{
 
     @Override
     public String getUsername() {
-        return super.getUserName();
+        return super.getUsername();
     }
 
     @Override

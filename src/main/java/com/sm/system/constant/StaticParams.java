@@ -1,5 +1,22 @@
 package com.sm.system.constant;
 
 public class StaticParams {
-
+	
+	public static String[] CLASSIFICATION = {"ASSETS", "COST-OF-GOODS-SOLD", "EQUITY", "EXPENSES"
+			, "LIABILITY", "SALES", "GROSS-PROFIT"};
+	
+	public static String[] SYSTEM_PARAMETER_KEYS = {
+			  "COMPANY-NAME"
+			, "COMPANY-ADDRESS"
+			, "COMPANY-POSTAL"
+			, "COMPANY-COUNTRY"
+			, "COMPANY-TEL"
+			, "COMPANY-FAX"
+			
+			, "JOURNAL-VOUCHER-NUMBER-PREFIX"
+			, "ACCOUNT-RECEIVABLE-NUMBER-PREFIX"
+			, "RECEIPT-VOUCHER-NUMBER-PREFIX"
+			, "ACCOUNT-PAYABLE-NUMBER-PREFIX"
+			, "PAYMENT-VOUCHER-NUMBER-PREFIX"
+	};
 }

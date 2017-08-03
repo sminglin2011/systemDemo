@@ -3,7 +3,7 @@ package com.sm.system.exception;
 public class ErrorInfo<T> {
 
     public static final Integer OK = 0;
-    public static final Integer ERROR = 100;
+    public static final Integer ERROR = 101; // ajax error, on the html use data.code == 101 判断ajax 执行结果
 
     private Integer code;
     private String message;
