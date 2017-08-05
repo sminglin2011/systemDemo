@@ -1,9 +1,14 @@
 package com.sm.system.constant;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+
 public class StaticParams {
 	
-	public static String[] CLASSIFICATION = {"ASSETS", "COST-OF-GOODS-SOLD", "EQUITY", "EXPENSES"
-			, "LIABILITY", "SALES", "GROSS-PROFIT"};
+	public static Collection<String> CLASSIFICATIONS = new ArrayList<String>
+	(Arrays.asList("ASSETS", "COST-OF-GOODS-SOLD", "EQUITY", "EXPENSES", "LIABILITY", "SALES", "GROSS-PROFIT"));
+
 	
 	public static String[] SYSTEM_PARAMETER_KEYS = {
 			  "COMPANY-NAME"

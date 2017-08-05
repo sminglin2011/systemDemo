@@ -24,7 +24,7 @@ public class GeneralLedgerType implements Serializable{
 	@GeneratedValue
 	private Integer id;
 	
-	@Column(length=3, nullable=false, unique=true)
+	@Column(length=5, nullable=false, unique=true)
 	private String clazz;
 	
 	private String classification;
