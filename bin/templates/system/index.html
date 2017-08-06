@@ -46,9 +46,9 @@
 		</nav> -->
 		<nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
 			<ul class="cl">
-				<li>超级管理员</li>
+				<!-- <li>超级管理员</li> -->
 				<li class="dropDown dropDown_hover">
-					<a href="#" class="dropDown_A">admin <i class="Hui-iconfont">&#xe6d5;</i></a>
+					<a href="#" class="dropDown_A" th:text="${session.SPRING_SECURITY_CONTEXT.authentication.principal.username}"> admin1<i class="Hui-iconfont">&#xe6d5;</i></a>
 					<ul class="dropDown-menu menu radius box-shadow">
 						<li><a href="javascript:;" onClick="myselfinfo()">个人信息</a></li>
 						<li><a th:href="@{logout}">退出</a></li>
@@ -94,8 +94,10 @@
 			<dt><i class="Hui-iconfont">&#xe620;</i> Accountant<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
+					<li><a data-href="journalVoucherMaster" data-title="Journal Voucher" href="javascript:void(0)">Journal Voucher</a></li>
+					<li><a data-href="chartOfAccountMaster" data-title="Chart Of Account" href="javascript:void(0)">Chart Of Account</a></li>
 					<li><a data-href="generalLedgerMaster" data-title="General Ledger" href="javascript:void(0)">General Ledger</a></li>
-			</ul>
+				</ul>
 		</dd>
 	</dl>
 		<dl id="menu-comments">

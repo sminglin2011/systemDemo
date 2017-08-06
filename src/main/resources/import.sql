@@ -1,13 +1,16 @@
---use systemDemo;
---CREATE TABLE IF NOT EXISTS system_parameter 
---(
---	id INT(11) NOT NULL AUTO_INCREMENT,
---	key_name VARCHAR(255) NOT NULL,
---	key_type VARCHAR(255) NULL DEFAULT NULL,
---	key_lenght VARCHAR(255) NULL DEFAULT NULL,
---	key_value VARCHAR(255) NULL DEFAULT NULL,
---	comments VARCHAR(255) NULL DEFAULT NULL,
---	PRIMARY KEY (id),
---	UNIQUE INDEX UK_a8ru9mqh4h6nm25s74d61jure (key_name)
---);
---INSERT INTO system_parameter VALUES (1, "COMPANY-NAME", "String", 50, "","");
+USE systemDemo;
+CREATE OR REPLACE PACKAGE test_pkg AS
+   PROCEDURE in_only_test (inParam1 IN VARCHAR2);
+   PROCEDURE in_and_out_test (inParam1 IN VARCHAR2, outParam1 OUT VARCHAR2);
+END test_pkg;
+
+CREATE OR REPLACE PACKAGE BODY test_pkg AS
+   PROCEDURE in_only_test(inParam1 IN VARCHAR2) AS
+   BEGIN
+      DBMS_OUTPUT.PUT_LINE('in_only_test');
+   END in_only_test;
+   PROCEDURE in_and_out_test(inParam1 IN VARCHAR2, outParam1 OUT VARCHAR2) AS
+   BEGIN
+      outParam1 := 'Woohoo Im an outparam, and this is my inparam ' || inParam1;
+   END in_and_out_test;
+END test_pkg;

@@ -9,6 +9,6 @@ public interface GeneralLedgerService {
 	
 	List<GeneralLedgerType> findAll() throws MyException;
 	
-	GeneralLedgerType update(String id, String value) throws MyException;
+	GeneralLedgerType update(String id, String name, String sequence) throws MyException;
 
 }

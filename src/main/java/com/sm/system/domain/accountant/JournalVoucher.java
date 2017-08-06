@@ -23,6 +23,9 @@ public class JournalVoucher implements Serializable{
 	@Id
 	@GeneratedValue
 	private Integer id;
+	
+	private String voucherNo;
+	
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date date;
 	private Double debitAmount;
@@ -82,5 +85,11 @@ public class JournalVoucher implements Serializable{
 	}
 	public void setItems(List<JournalVoucherItem> items) {
 		this.items = items;
+	}
+	public String getVoucherNo() {
+		return voucherNo;
+	}
+	public void setVoucherNo(String voucherNo) {
+		this.voucherNo = voucherNo;
 	}
 }

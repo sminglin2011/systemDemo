@@ -17,5 +17,7 @@ public interface ParameterService {
 	
 	List<SystemParameter> findAll();
 	
+	SystemParameter findByName(String name);
+	
 	void deleteAll();
 }

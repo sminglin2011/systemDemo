@@ -27,7 +27,7 @@ public class ParameterServiceImpl implements ParameterService{
 	public List<SystemParameter> save(List<SystemParameter> entitys) {
 		return repository.save(entitys);
 	}
-
+	
 	@Override
 	public void deleteAll() {
 		repository.deleteAll();
@@ -59,6 +59,11 @@ public class ParameterServiceImpl implements ParameterService{
 		}
 		
 		return parameter;
+	}
+
+	@Override
+	public SystemParameter findByName(String name) {
+		return repository.findByKeyName(name);
 	}
 
 }

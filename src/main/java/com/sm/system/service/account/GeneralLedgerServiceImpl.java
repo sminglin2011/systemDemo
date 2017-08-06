@@ -40,8 +40,11 @@ public class GeneralLedgerServiceImpl implements GeneralLedgerService {
 			GeneralLedgerType ledger = new GeneralLedgerType();
 			ledger.setClassification(s);
 			Random random = new Random();
-			log.debug(s + "=what is it math.random=" +String.format("%04d", random.nextInt(10000)) );
-			ledger.setClazz("C"+String.format("%04d", random.nextInt(10000)));
+			String tempString = String.format("%04d", random.nextInt(10000));
+			log.debug(s + "=what is it math.random=" +tempString );
+			ledger.setClazz("C"+tempString);
+			ledger.setName(tempString);
+			ledger.setSequence(tempString);
 			list.add(ledger);
 		}
 		repository.save(list);
@@ -49,15 +52,20 @@ public class GeneralLedgerServiceImpl implements GeneralLedgerService {
 	}
 
 	@Override
-	public GeneralLedgerType update(String id, String value) throws MyException{
+	public GeneralLedgerType update(String id, String name, String sequence) throws MyException{
 		GeneralLedgerType ledger = repository.findOne(Integer.valueOf(id));
-		ledger.setName(value);
+		if (name != null && !name.equals("")) {
+			ledger.setName(name);
+		}
+		if (sequence != null && !sequence.equals("")) {
+			ledger.setSequence(sequence);
+		}	
 		try {
 			repository.save(ledger);
-		} catch (Exception e) {
+		} catch (RuntimeException e) {
 			log.error(e.getLocalizedMessage());
 			e.printStackTrace();
-			throw new MyException(e.getLocalizedMessage());
+			throw new MyException("Sequence Max length is 5 digits");
 		}
 		
 		return ledger;

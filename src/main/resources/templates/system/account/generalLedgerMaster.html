@@ -34,23 +34,31 @@
 				<tr class="text-c">
 					<th width="25"><input id="checkAll" type="checkbox" name="" value=""></input></th>
 					<th width="30">ID</th>
+					<th>Class</th>
 					<th>Classification</th>
 					<th>Name</th>
 					<th>Sequence</th>
-					<th>Operation</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr class="text-c" th:each="ledger : ${generalLedgers}"> 
 				     <td><input type="checkbox" th:value="${ledger.id}" name="id"></input></td>
 				     <td th:text="${ledger.id}">id</td>
+				     <td th:text="${ledger.clazz}">id</td>
 				     <td th:text="${ledger.classification}">classification</td>
-				     <td th:text="${ledger.name}">name</td>
-				     <td th:text="${ledger.sequence}">sequence</td>
-				     <td class="f-14 td-manage">
+				     <td>
+				     	<a href="javascript:;" th:onclick="'javascript:_editName(this,\''+${ledger.classification}+'\', \''+${ledger.id}+'\');'"
+				     	 th:text="${ledger.name}">name</a>
 				     	<a style="text-decoration:none" class="ml-5" href="javascript:;"  title="编辑"
-				     	th:onclick="'javascript:_add(this,\''+${ledger.name}+'\', \''+${ledger.id}+'\');'">
-				     	<i class="Hui-iconfont">&#xe6df;</i></a> 
+				     	th:onclick="'javascript:_editName(this,\''+${ledger.classification}+'\', \''+${ledger.id}+'\');'">
+				     	<i class="Hui-iconfont">&#xe6df;</i></a>
+				     </td>
+				     <td>
+				     	<a href="javascript:;" th:onclick="'javascript:_editSequence(this,\''+${ledger.classification}+'\', \''+${ledger.id}+'\');'"
+				     	 th:text="${ledger.sequence}">sequence</a>
+				     	<a style="text-decoration:none" class="ml-5" href="javascript:;"  title="编辑"
+				     	th:onclick="'javascript:_editSequence(this,\''+${ledger.classification}+'\', \''+${ledger.id}+'\');'">
+				     	<i class="Hui-iconfont">&#xe6df;</i></a>
 				     </td>
 				 </tr>
 			</tbody>
@@ -74,7 +82,7 @@ var table = $('.table-sort').DataTable({
 	"pading":false,
 	"aoColumnDefs": [
 	  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-	  {"orderable":false,"aTargets":[0,5]}// 不参与排序的列
+	  {"orderable":false,"aTargets":[0]}// 不参与排序的列
 	]
 });
 /*刷新*/
@@ -82,16 +90,16 @@ function refresh(){
 	location.replace(location.href);
 }
 /*添加 or 编辑*/
-function _add(obj, title, id){
+function _editName(obj, title, id){
 	layer.prompt({
 		  formType: 0, //输入框类型，支持0（文本）默认1（密码）2（多行文本）
-		  value: '初始值',
+		  value: '', //初始值
 		  title: title,
 		  area: ['400px', '180px'] //自定义文本域宽高
 		}, function(value, index, elem){
 			console.log(value, "=value");
 			//$.post(url,data,success(data, textStatus, jqXHR),dataType)
-			$.post("saveParameter", {id:id,keyValue:value}, function(data, textStatus, jqXHR){
+			$.post("saveGeneralLedger", {id:id,nameValue:value}, function(data, textStatus, jqXHR){
 				console.log("data", data);
 				console.log("textStatus", textStatus);
 				console.log("jqXHR", jqXHR);
@@ -108,76 +116,32 @@ function _add(obj, title, id){
 		  	
 		});
 }
-/*编辑*/
-function _edit(title,url){
-	layer.prompt(function(value, index, elem){
-		  
-		  layer.close(index);
-		});
-	/* console.log(title, url);
-	layer_show(title,url); */
-	/* var index = layer.open({
-		type: 2,
-		title: title,
-		content: url
-	});
-	layer.full(index); */
-}
-/*批量删除
-function datadel(){
-	var ids='';
-	$("input[name='id']:checked").each(function () {
-        ids = ids + this.value + ",";
-    });
-	ids = ids.substring(0, ids.length-1)
-	console.log(ids, "ids");
-	if(ids == '') {
-		alert("Please select row to delete");
-	} else {
-		layer.confirm('确认要删除吗？',function(index){
-			$.ajax({
-				type: 'POST',
-				url: 'deleteUser?ids='+ids,
-				dataType: 'json',
-				success: function(data){
-					if(data.result) {
-						layer.msg('已删除!',{icon:1,time:1000},function(){
-							refresh();
-						});
-					} else {
-						layer.msg(data.msg,{icon:1,time:1000});
-					}
-					
-				},
-				error:function(data) {
-					console.log(data.msg);
-				},
-			});		
-		});
-	}
-}*/
-/*删除
-function menu_del(obj,id){
-	layer.confirm('确认要删除吗？',function(index){
-		$.ajax({
-			type: 'POST',
-			url: 'deleteUser?ids='+id,
-			dataType: 'json',
-			success: function(data){
-				if(data.result) {
-					$(obj).parents("tr").remove();
-					layer.msg('已删除!',{icon:1,time:1000});
-				} else {
-					layer.msg(data.msg,{icon:1,time:1000});
+function _editSequence(obj, title, id){
+	layer.prompt({
+		  formType: 0, //输入框类型，支持0（文本）默认1（密码）2（多行文本）
+		  value: '', //初始值
+		  title: title,
+		  area: ['400px', '180px'] //自定义文本域宽高
+		}, function(value, index, elem){
+			console.log(value, "=value");
+			//$.post(url,data,success(data, textStatus, jqXHR),dataType)
+			$.post("saveGeneralLedger", {id:id,sequenceValue:value}, function(data, textStatus, jqXHR){
+				console.log("data", data);
+				console.log("textStatus", textStatus);
+				console.log("jqXHR", jqXHR);
+				if(data.code == 101) { // 101 ajax error
+					layer.msg(data.message, {icon: 2, time:5000}, function(){layer.close(index)}); 
+				}else {
+					layer.msg("Successful", {icon:1, time:1000}, function(){
+						refresh();layer.close(index);
+					});
 				}
-				
-			},
-			error:function(data) {
-				console.log(data.msg);
-			},
-		});		
-	});
-} */
+			})
+			.error(function() { alert("error"); })
+		    .complete(function(event,xhr,options) { console.log(xhr)});
+		  	
+		});
+}
 
 </script> 
 </body>

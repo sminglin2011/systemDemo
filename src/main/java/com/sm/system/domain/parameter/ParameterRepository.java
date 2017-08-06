@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 @Repository("ParameterRepository")
 public interface ParameterRepository extends JpaRepository<SystemParameter, Integer>{
 
-	
+	SystemParameter findByKeyName(String name);
 }
