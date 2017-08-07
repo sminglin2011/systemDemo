@@ -50,7 +50,26 @@ public class SystemUtil {
     public static Date parse(String strDate) throws ParseException{
         return getDateFormat().parse(strDate);
     }
+    /**
+     * Date convert to dateFormat
+     * @param date
+     * @param dateFormat
+     * @return
+     * @throws ParseException
+     */
     public static String formatDate(Date date, String dateFormat) throws ParseException {
         return getDateFormat(dateFormat).format(date);
+    }
+    
+    /**
+     * check empty
+     * @param st
+     * @return
+     */
+    public static boolean isEmpty(String st) {
+    	if (st == null || st.equals("") || st.equals("0")) {
+    		return true;
+    	}
+    	return false;
     }
 }

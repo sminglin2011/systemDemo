@@ -20,4 +20,11 @@ public interface ParameterService {
 	SystemParameter findByName(String name);
 	
 	void deleteAll();
+	
+	/************************** development using ******************************************/
+	/**
+	 * new parameter key name from StaticParams.java
+	 */
+	void patchNewParameter();
+	/********************************************************************/
 }

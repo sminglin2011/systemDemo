@@ -30,7 +30,7 @@ public class NumberCtrlServiceImpl implements NumberCtrlService{
 		NumberCtrl ctrl = null;
 		lock.lock();
 		try {
-			String pattern = SystemUtil.formatDate(voucherDate, StaticParams.DATEFORMAT_YYYY);
+			String pattern = SystemUtil.formatDate(voucherDate, StaticParams.DATEFORMAT_YYMM);
 			ctrl = repository.findByPrefixAndPattern(voucherType, pattern);
 			if (ctrl == null) {
 				ctrl = new NumberCtrl();
@@ -42,7 +42,7 @@ public class NumberCtrlServiceImpl implements NumberCtrlService{
 			}
 			ctrl.setCurrentNumber(ctrl.getCurrentNumber()+1);
 			repository.save(ctrl);
-			nextId = voucherType.toUpperCase() + pattern + String.valueOf((ctrl.getCurrentNumber()));
+			nextId = voucherType.toUpperCase() + pattern + String.format("%04d", ctrl.getCurrentNumber());
 			return nextId;
 		} catch (ParseException e) {
 			log.error(e.getLocalizedMessage());

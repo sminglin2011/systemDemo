@@ -15,6 +15,7 @@ import com.sm.system.domain.accountant.JournalVoucherRepository;
 import com.sm.system.domain.parameter.SystemParameter;
 import com.sm.system.exception.MyException;
 import com.sm.system.service.parameter.ParameterService;
+import com.sm.system.util.SystemUtil;
 
 @Service("JournalVoucherService")
 public class JournalVoucherServiceImpl implements JournalVoucherService {
@@ -52,8 +53,9 @@ public class JournalVoucherServiceImpl implements JournalVoucherService {
 				// 获取 journal number
 				SystemParameter journalVoucherPrefix = parameterSvc.findByName("JOURNAL-VOUCHER-NUMBER-PREFIX");
 				journal.setVoucherNo(numberCtrlSvc.getNextNo(
-						journalVoucherPrefix.getKeyValue()==null ? "JV" : journalVoucherPrefix.getKeyValue()
+						SystemUtil.isEmpty(journalVoucherPrefix.getKeyValue()) ? "JV" : journalVoucherPrefix.getKeyValue()
 							, journal.getDate()));
+				journal = repository.save(journal);
 			}
 		} catch (Exception e) {
 			log.error(e.getLocalizedMessage());

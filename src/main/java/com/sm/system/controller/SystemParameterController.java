@@ -33,4 +33,9 @@ public class SystemParameterController {
 		parameterSvc.update(id, keyValue);
 		return "ok";
 	}
+	@RequestMapping("/patchNewParameter")
+	private String patchNewParameter() throws MyException{
+		parameterSvc.patchNewParameter();
+		return "ok";
+	}
 }
