@@ -13,7 +13,9 @@ import org.springframework.stereotype.Service;
 import com.sm.system.constant.StaticParams;
 import com.sm.system.domain.NumberCtrl;
 import com.sm.system.domain.NumberCtrlRepository;
+import com.sm.system.domain.parameter.SystemParameter;
 import com.sm.system.exception.MyException;
+import com.sm.system.service.parameter.ParameterService;
 import com.sm.system.util.SystemUtil;
 @Service("NumberCtrlService")
 public class NumberCtrlServiceImpl implements NumberCtrlService{
@@ -24,25 +26,32 @@ public class NumberCtrlServiceImpl implements NumberCtrlService{
 	@Resource(name="NumberCtrlRepository")
 	private NumberCtrlRepository repository;
 	
+	@Resource(name="ParameterServiceImpl")
+	private ParameterService parameterSvc;
+	
 	@Override
 	public String getNextNo(String voucherType, Date voucherDate) throws MyException {
 		String nextId = "";
 		NumberCtrl ctrl = null;
+		SystemParameter patternParam = parameterSvc.findByName("ACCOUNT-NUMBER-PATTERN");
+		SystemParameter NumLenghtParam = parameterSvc.findByName("ACCOUNT-NUMBER-LENGTH");
 		lock.lock();
 		try {
-			String pattern = SystemUtil.formatDate(voucherDate, StaticParams.DATEFORMAT_YYMM);
+			String pattern = (patternParam.getKeyValue() == null || patternParam.getKeyValue().equals(""))
+					? SystemUtil.formatDate(voucherDate, StaticParams.DATEFORMAT_YYMM)
+					: SystemUtil.formatDate(voucherDate, patternParam.getKeyValue());
 			ctrl = repository.findByPrefixAndPattern(voucherType, pattern);
 			if (ctrl == null) {
 				ctrl = new NumberCtrl();
 				ctrl.setPrefix(voucherType);
 				ctrl.setPattern(pattern);
-				ctrl.setLength(4);
+//				ctrl.setLength((NumLenghtParam.getKeyValue() == null || NumLenghtParam.getKeyValue().equals("")) ? 4 : Integer.valueOf(NumLenghtParam.getKeyValue()));
 				ctrl.setCurrentNumber(0);
 				repository.save(ctrl);
 			}
 			ctrl.setCurrentNumber(ctrl.getCurrentNumber()+1);
 			repository.save(ctrl);
-			nextId = voucherType.toUpperCase() + pattern + String.format("%04d", ctrl.getCurrentNumber());
+			nextId = voucherType.toUpperCase() + pattern + String.format("%0"+ ((NumLenghtParam.getKeyValue() == null || NumLenghtParam.getKeyValue().equals("")) ? 4 : Integer.valueOf(NumLenghtParam.getKeyValue())) +"d", ctrl.getCurrentNumber());
 			return nextId;
 		} catch (ParseException e) {
 			log.error(e.getLocalizedMessage());

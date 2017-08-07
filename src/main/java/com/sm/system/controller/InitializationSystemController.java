@@ -32,15 +32,15 @@ public class InitializationSystemController {
 		List<SystemParameter> parameters = new ArrayList<>();
 		SystemParameter parameter = null;
 		Map<String, String[]> params = request.getParameterMap();
-		for (String keyname : StaticParams.SYSTEM_PARAMETER_KEYS) {
-			log.debug("keyname=" + keyname.replace("-", "").toLowerCase());
+		for (Object[] keyname : StaticParams.SYSTEM_PARAMETER_KEYS) {
+//			log.debug("keyname=" + keyname.replace("-", "").toLowerCase());
 			/**
 			 * keyType = {String, boolean}
 			 */
 			boolean onInitPage = false;
 			for (String paramkey : params.keySet()) {
 				log.debug("paramkey=" + paramkey.toLowerCase());
-				if (paramkey.toLowerCase().equals(keyname.replace("-", "").toLowerCase())) {
+				if (paramkey.toLowerCase().equals(keyname[0].toString().replace("-", "").toLowerCase())) {
 					String[] values = params.get(paramkey);
 					StringBuffer sb = new StringBuffer();
 					for (String str : values) {
@@ -48,13 +48,13 @@ public class InitializationSystemController {
 					}
 					// parameter = new SystemParameter(keyName, keyType,
 					// keyLenght, keyValue, comments);
-					parameter = new SystemParameter(keyname, "String", "50", sb.toString(), "");
+					parameter = new SystemParameter(keyname[0].toString(), keyname[1].toString(), keyname[2].toString(), sb.toString(), "");
 					onInitPage = true;
 					continue;
 				}
 			}
 			if (!onInitPage) {
-				parameter = new SystemParameter(keyname, "String", "50", "", "");
+				parameter = new SystemParameter(keyname[0].toString(), keyname[1].toString(), keyname[2].toString(), "", "");
 			}
 			parameters.add(parameter);
 		}

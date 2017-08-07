@@ -32,7 +32,7 @@ public class NumberCtrl implements Serializable{
 	@Column(nullable=false)
 	private String pattern;
 	
-	private int length;
+//	private int length;
 
 	public Integer getId() {
 		return id;
@@ -66,12 +66,12 @@ public class NumberCtrl implements Serializable{
 		this.pattern = pattern;
 	}
 
-	public int getLength() {
-		return length;
-	}
-
-	public void setLength(int length) {
-		this.length = length;
-	}
+//	public int getLength() {
+//		return length;
+//	}
+//
+//	public void setLength(int length) {
+//		this.length = length;
+//	}
 	
 }

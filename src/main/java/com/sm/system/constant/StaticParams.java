@@ -11,33 +11,25 @@ public class StaticParams {
 	public static Collection<String> CLASSIFICATIONS = new ArrayList<String>
 	(Arrays.asList("ASSETS", "COST-OF-GOODS-SOLD", "EQUITY", "EXPENSES", "LIABILITY", "SALES")); //, "GROSS-PROFIT"
 
-	public static Collection<String> SYSTEM_PARAMETER_KEYS = new ArrayList<String>
-	(Arrays.asList(
-			"COMPANY-NAME"
-			, "COMPANY-ADDRESS"
-			, "COMPANY-POSTAL"
-			, "COMPANY-COUNTRY"
-			, "COMPANY-TEL"
-			, "COMPANY-FAX"
-			
-			, "JOURNAL-VOUCHER-NUMBER-PREFIX"
-			, "ACCOUNT-RECEIVABLE-NUMBER-PREFIX"
-			, "RECEIPT-VOUCHER-NUMBER-PREFIX"
-			, "ACCOUNT-PAYABLE-NUMBER-PREFIX"
-			, "PAYMENT-VOUCHER-NUMBER-PREFIX"
-			
-			, "ACCOUNT-NUMBER-PATTERN"
-			, "ACCOUNT-NUMBER-LENGTH"));
-	private static Map<String, Object> paramMap() {
-        Map<String,Object> myMap = new HashMap<String,Object>();
-        myMap.put("keyName", "COMPANY-NAME");
-        myMap.put("c", "d");
-        return myMap;
+	private static  Collection<String[]> SYSTEMPARAMETER() {
+		Collection<String[]> a = new ArrayList<>();
+		a.add(new String[]{"COMPANY-NAME","String","50"});
+		a.add(new String[]{"COMPANY-POSTAL","String","50"});
+		a.add(new String[]{"COMPANY-COUNTRY","String","50"});
+		a.add(new String[]{"COMPANY-TEL","String","50"});
+		a.add(new String[]{"COMPANY-FAX","String","50"});
+		
+		a.add(new String[]{"JOURNAL-VOUCHER-NUMBER-PREFIX","String","50"});
+		a.add(new String[]{"ACCOUNT-RECEIVABLE-NUMBER-PREFIX","String","50"});
+		a.add(new String[]{"RECEIPT-VOUCHER-NUMBER-PREFIX","String","50"});
+		a.add(new String[]{"ACCOUNT-PAYABLE-NUMBER-PREFIX","String","50"});
+		a.add(new String[]{"PAYMENT-VOUCHER-NUMBER-PREFIX","String","50"});
+		
+		a.add(new String[]{"ACCOUNT-NUMBER-PATTERN","String","50"});
+		a.add(new String[]{"ACCOUNT-NUMBER-LENGTH","String","50"});
+		return a;
     }
-	public static Collection<Map<String, Object>> testparam = new ArrayList<>(
-			Arrays.asList(
-					paramMap()
-					));
+	public static Collection<String[]> SYSTEM_PARAMETER_KEYS = SYSTEMPARAMETER();
 	
 //	public static String[] SYSTEM_PARAMETER_KEYS = {
 //			  "COMPANY-NAME"

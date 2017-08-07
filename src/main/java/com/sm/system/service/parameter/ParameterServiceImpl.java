@@ -76,24 +76,35 @@ public class ParameterServiceImpl implements ParameterService{
 	@Override
 	public void patchNewParameter() {
 		Collection<Object[]> keyNames = repository.findAllKey();
-		for(Object[] s: keyNames) {
-			for(int i=0; i<s.length; i++) {
-				log.debug(".................what is it: parameter keyName = " + s[i]);
+		Collection<String[]> newKeyNames = new ArrayList<>();
+		log.debug("size >>>>>>" + newKeyNames.size());
+		
+		for(String[] s: StaticParams.SYSTEM_PARAMETER_KEYS) {
+			log.debug("自定义取出来在 s[0].toString() = " + s[0].toString());
+			boolean inString = false;
+			for(Object[] o : keyNames){
+				log.debug("数据库取出来在 o[0].toString() = " + o[0].toString());
+				if (s[0].equals(o[0].toString())) {
+					inString = true;
+					break;
+				}
+			}
+			if (!inString) {
+				newKeyNames.add(s);
 			}
 		}
-//		Collection<String> newKeyNames = CollectionUtil.getDiffentNoDuplicate(StaticParams.SYSTEM_PARAMETER_KEYS, keyNames);
-//		/**
-//		 * 如果手动在数据库system parameter table加数据会一直重复insert to table
-//		 */
-//		List<SystemParameter> list = new ArrayList<>();
-//		for(String s: newKeyNames) {
-//			SystemParameter param = new SystemParameter();
-//			param.setKeyName(s);
-//			param.setKeyType("String");
-//			param.setKeyLenght("50");
-//			list.add(param);
-//		}
-//		repository.save(list);
+		/**
+		 * 如果手动在数据库system parameter table加数据会一直重复insert to table
+		 */
+		List<SystemParameter> list = new ArrayList<>();
+		for(String[] s: newKeyNames) {
+			SystemParameter param = new SystemParameter();
+			param.setKeyName(s[0]); //这里的下标顺序一定跟StaticParam里的顺序一样
+			param.setKeyType(s[1]);
+			param.setKeyLenght(s[2]);
+			list.add(param);
+		}
+		repository.save(list);
 	}
 
 }

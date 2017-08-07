@@ -89,6 +89,33 @@ var table = $('.table-sort').DataTable({
 function refresh(){
 	location.replace(location.href);
 }
+/*添加 or 编辑*/
+function _add(obj, title, id){
+	layer.prompt({
+		  formType: 0, //输入框类型，支持0（文本）默认1（密码）2（多行文本）
+		  value: '初始值',
+		  title: title,
+		  area: ['400px', '180px'] //自定义文本域宽高
+		}, function(value, index, elem){
+			console.log(value, "=value");
+			//$.post(url,data,success(data, textStatus, jqXHR),dataType)
+			$.post("saveParameter", {id:id,keyValue:value}, function(data, textStatus, jqXHR){
+				console.log("data", data);
+				console.log("textStatus", textStatus);
+				console.log("jqXHR", jqXHR);
+				if(data.code == 101) { // 101 ajax error
+					layer.msg(data.message, {icon: 2, time:3000}, function(){layer.close(index)}); 
+				}else {
+					layer.msg("Successful", {icon:1, time:1000}, function(){
+						refresh();layer.close(index);
+					});
+				}
+			})
+			.error(function() { alert("error"); })
+		    .complete(function(event,xhr,options) { console.log(xhr)});
+		  	
+		});
+}
 /* Development Patch new parameter*/
 function patchParameter(obj, title, id){
 	$.post("patchNewParameter",  function(data, textStatus, jqXHR){
