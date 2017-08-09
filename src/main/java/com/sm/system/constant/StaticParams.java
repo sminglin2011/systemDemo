@@ -27,6 +27,9 @@ public class StaticParams {
 		
 		a.add(new String[]{"ACCOUNT-NUMBER-PATTERN","String","50"});
 		a.add(new String[]{"ACCOUNT-NUMBER-LENGTH","String","50"});
+		
+		a.add(new String[]{"SYSTEM_CURRENCY","String","50"});
+		
 		return a;
     }
 	public static Collection<String[]> SYSTEM_PARAMETER_KEYS = SYSTEMPARAMETER();

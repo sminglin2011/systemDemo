@@ -13,4 +13,6 @@ public interface ChartOfAccountService {
 	ChartOfAccount findOne(String id);
 	
 	ChartOfAccount save(ChartOfAccount entity) throws MyException;
+	
+	List<ChartOfAccount> initChartOfAccount() throws MyException;
 }

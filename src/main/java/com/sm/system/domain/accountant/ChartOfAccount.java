@@ -13,6 +13,37 @@ import javax.persistence.OneToMany;
 @Entity
 public class ChartOfAccount implements Serializable{
 
+	public ChartOfAccount() {
+		super();
+	}
+	public ChartOfAccount(Integer ledgerCode, String description, GeneralLedgerType ledgerType, String gstType,
+			String currency) {
+		super();
+		this.ledgerCode = ledgerCode;
+		this.description = description;
+		this.ledgerType = ledgerType;
+		this.gstType = gstType;
+		this.currency = currency;
+	}
+	public ChartOfAccount(Integer id, Integer ledgerCode, String description, GeneralLedgerType ledgerType,
+			String gstType, String currency, Boolean gstRevenue, Boolean retainEarning, Boolean debit, Boolean credit,
+			Boolean inputGst, Boolean outputGst, String customReportLedgerCode, String customReportDescription) {
+		super();
+		this.id = id;
+		this.ledgerCode = ledgerCode;
+		this.description = description;
+		this.ledgerType = ledgerType;
+		this.gstType = gstType;
+		this.currency = currency;
+		this.gstRevenue = gstRevenue;
+		this.retainEarning = retainEarning;
+		this.debit = debit;
+		this.credit = credit;
+		this.inputGst = inputGst;
+		this.outputGst = outputGst;
+		this.customReportLedgerCode = customReportLedgerCode;
+		this.customReportDescription = customReportDescription;
+	}
 	/**
 	 * 
 	 */
@@ -31,8 +62,12 @@ public class ChartOfAccount implements Serializable{
 	private String gstType;
 	@Column(length=15)
 	private String currency;
-	private Boolean gstRevenue;
-	private Boolean retainEarning;
+	private Boolean gstRevenue = false;
+	private Boolean retainEarning = false;
+	private Boolean debit = false;
+	private Boolean credit = false;
+	private Boolean inputGst = false;
+	private Boolean outputGst = false;
 	private String customReportLedgerCode;
 	private String customReportDescription;
 	
@@ -95,6 +130,30 @@ public class ChartOfAccount implements Serializable{
 	}
 	public void setCustomReportDescription(String customReportDescription) {
 		this.customReportDescription = customReportDescription;
+	}
+	public Boolean getDebit() {
+		return debit;
+	}
+	public void setDebit(Boolean debit) {
+		this.debit = debit;
+	}
+	public Boolean getCredit() {
+		return credit;
+	}
+	public void setCredit(Boolean credit) {
+		this.credit = credit;
+	}
+	public Boolean getInputGst() {
+		return inputGst;
+	}
+	public void setInputGst(Boolean inputGst) {
+		this.inputGst = inputGst;
+	}
+	public Boolean getOutputGst() {
+		return outputGst;
+	}
+	public void setOutputGst(Boolean outputGst) {
+		this.outputGst = outputGst;
 	}
 	
 }

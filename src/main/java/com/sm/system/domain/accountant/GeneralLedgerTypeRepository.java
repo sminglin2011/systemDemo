@@ -16,5 +16,7 @@ public interface GeneralLedgerTypeRepository extends JpaRepository<GeneralLedger
 	
 	@Query("SELECT distinct(gl.classification) FROM GeneralLedgerType gl ")
     public Collection<String> findAllClassification();
+	
+	GeneralLedgerType findByClassification(String classification);
 
 }

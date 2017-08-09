@@ -70,6 +70,37 @@ public class GeneralLedgerServiceImpl implements GeneralLedgerService {
 		
 		return ledger;
 	}
+
+	@Override
+	public void initGeneralLedger() throws MyException {
+		Collection<String> classificaitons = repository.findAllClassification();
+		for(String s: classificaitons) {
+			log.debug(".................what is it: s = " + s);
+		}
+		Collection<String> newClassification = CollectionUtil.getDiffentNoDuplicate(StaticParams.CLASSIFICATIONS, classificaitons);
+		/**
+		 * 如果手动在数据库general ledger type table加数据会一直重复insert to table
+		 */
+		List<GeneralLedgerType> list = new ArrayList<>();
+		for(String s: newClassification) {
+			GeneralLedgerType ledger = new GeneralLedgerType();
+			ledger.setClassification(s);
+			Random random = new Random();
+			String tempString = String.format("%04d", random.nextInt(10000));
+			log.debug(s + "=what is it math.random=" +tempString );
+			ledger.setClazz("C"+tempString);
+			ledger.setName(tempString);
+			ledger.setSequence(tempString);
+			list.add(ledger);
+		}
+		repository.save(list);
+		
+	}
+
+	@Override
+	public GeneralLedgerType findByClassification(String classification) {
+		return repository.findByClassification(classification);
+	}
 	
 	
 }

@@ -74,6 +74,18 @@ public class AccountantController {
 		return "system/account/chartOfAccountMaster";
 	}
 	/**
+	 * Patch System Default COA
+	 * @param model
+	 * @return
+	 * @throws MyException
+	 */
+	@RequestMapping("/initCOA")
+	@ResponseBody
+	private String initCOA(Model model) throws MyException {
+		coaSvc.initChartOfAccount();
+		return "ok";
+	}
+	/**
 	 * go to add chart of account page, if id != null then get COA entity
 	 * @param model
 	 * @param id

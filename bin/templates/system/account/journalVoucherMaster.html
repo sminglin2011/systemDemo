@@ -42,13 +42,10 @@
 				<tr class="text-c">
 					<th width="25"><input id="checkAll" type="checkbox" name="" value=""></input></th>
 					<th width="30">ID</th>
-					<th>Ledger Type</th>
-					<th>Ledger Code</th>
-					<th>Description</th>
-					<th>GST Type</th>
-					<th>Currency</th>
-					<th>Revenue</th>
-					<th>Retain Earning</th>
+					<th>VoucherNumber</th>
+					<th>Date</th>
+					<th>DebitAmount</th>
+					<th>CreditAmount</th>
 					<th>Operation</th>
 				</tr>
 			</thead>
@@ -56,13 +53,10 @@
 				<tr class="text-c" th:each="jv : ${list}"> 
 				     <td><input type="checkbox" th:value="${jv.id}" name="id"></input></td>
 				     <td th:text="${jv.id}">id</td>
-				     <td th:text="${jv.id}">ledger type</td>
-				     <td th:text="${jv.id}">ledger code</td>
-				     <td th:text="${jv.id}">description</td>
-				     <td th:text="${jv.id}">GST type</td>
-				     <td th:text="${jv.id}">currency</td>
-				     <td th:text="${jv.id}">revenue</td>
-				     <td th:text="${jv.id}">retain earning</td>
+				     <td th:text="${jv.voucherNo}">voucherNo</td>
+				     <td th:text="${#dates.format(jv.date,'yyyy-MM-dd')}">Date</td>
+				     <td th:text="${jv.debitAmount}">debitAmount</td>
+				     <td th:text="${jv.creditAmount}">creditAmount</td>
 				     <td class="f-14 td-manage">
 				     <a style="text-decoration:none" class="ml-5" th:onclick="'javascript:_add(\'Edit\',\'chartOfAccountAdd?id='+${jv.id}+'\');'" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> 
 				     <a style="text-decoration:none" class="ml-5" th:onclick="'javascript:_del(this,'+${jv.id}+');'" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a>
@@ -89,7 +83,7 @@ var table = $('.table-sort').DataTable({
 	"pading":false,
 	"aoColumnDefs": [
 	  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-	  {"orderable":false,"aTargets":[0,9]}// 不参与排序的列
+	  {"orderable":false,"aTargets":[0,6]}// 不参与排序的列
 	]
 });
 /*刷新*/

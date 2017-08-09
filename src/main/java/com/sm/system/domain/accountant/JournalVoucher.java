@@ -47,32 +47,36 @@ public class JournalVoucher implements Serializable{
 		this.date = date;
 	}
 	public Double getDebitAmount() {
-		double amount = 0;
-		for(JournalVoucherItem item : items) {
-			amount = amount + item.getDebit();
-		}
-		return amount;
+//		double amount = 0;
+//		for(JournalVoucherItem item : items) {
+//			amount = amount + item.getDebit();
+//		}
+//		return amount;
+		return this.debitAmount;
 	}
 	public void setDebitAmount(Double debitAmount) {
-		double amount = 0;
-		for(JournalVoucherItem item : items) {
-			amount = amount + item.getDebit();
-		}
-		this.debitAmount = amount;
+//		double amount = 0;
+//		for(JournalVoucherItem item : items) {
+//			amount = amount + item.getDebit();
+//		}
+		this.debitAmount = debitAmount;
 	}
 	public Double getCreditAmount() {
-		double amount = 0;
-		for(JournalVoucherItem item : items) {
-			amount = amount + item.getCredit();
-		}
-		return amount;
+//		double amount = 0;
+//		for(JournalVoucherItem item : this.items) {
+//			amount = amount + item.getCredit();
+//		}
+//		return amount;
+		return this.creditAmount;
 	}
 	public void setCreditAmount(Double creditAmount) {
-		double amount = 0;
-		for(JournalVoucherItem item : items) {
-			amount = amount + item.getCredit();
-		}
-		this.creditAmount = amount;
+//		double amount = 0;
+//		for(JournalVoucherItem item : this.items) {
+//			System.out.println(item.getId() + "===journal voucher items = " + items.size());
+//			amount = amount + item.getCredit();
+//		}
+//		this.creditAmount = amount;
+		this.creditAmount = creditAmount;
 	}
 	public String getComments() {
 		return this.comments;
