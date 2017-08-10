@@ -56,6 +56,9 @@ public class ParameterServiceImpl implements ParameterService{
 	@Override
 	public SystemParameter update(String id, String value) throws MyException {
 		SystemParameter parameter = repository.findOne(Integer.valueOf(id));
+		if(parameter.getKeyName().contains("SMSYSTEM_")) { //包含SMSYSTEM_在parameter都只能在初始化页面增加不能做修改
+			return parameter;
+		}
 		parameter.setKeyValue(value);
 		try {
 			repository.save(parameter);

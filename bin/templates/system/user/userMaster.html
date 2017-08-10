@@ -32,6 +32,7 @@
 		<span class="l">
 		<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> Delete</a> 
 		<a href="javascript:;" onclick="_add('Add','userAdd?id=0')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> Add</a>
+		<a href="javascript:;" onclick="_extend()" class="btn btn-warning radius"><i class="Hui-iconfont">&#xe63f;</i> Extend</a>
 		</span> <span class="r"></span> </div>
 	<div class="mt-20">
 		<table id="table" class="table table-border table-bordered table-bg table-hover table-sort table-responsive">
@@ -88,6 +89,17 @@ function refresh(){
 /*添加 or 编辑*/
 function _add(title,url){
 	layer_show(title,url);
+}
+/*延期*/
+function _extend(){
+	layer.prompt({
+		  formType: 1, //输入框类型，支持0（文本）默认1（密码）2（多行文本）
+		  value: 'Password',
+		  title: '请输入密码'
+		 // area: ['800px', '350px'] //自定义文本域宽高
+		}, function(value, index, elem){
+		  layer.close(index);
+		});
 }
 /*初始化系统默认char of account*/
 function _initCOA(){

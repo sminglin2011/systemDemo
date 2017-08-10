@@ -8,6 +8,7 @@ import java.util.Map;
 
 public class StaticParams {
 	
+	
 	public static Collection<String> CLASSIFICATIONS = new ArrayList<String>
 	(Arrays.asList("ASSETS", "COST-OF-GOODS-SOLD", "EQUITY", "EXPENSES", "LIABILITY", "SALES")); //, "GROSS-PROFIT"
 
@@ -29,6 +30,11 @@ public class StaticParams {
 		a.add(new String[]{"ACCOUNT-NUMBER-LENGTH","String","50"});
 		
 		a.add(new String[]{"SYSTEM_CURRENCY","String","50"});
+		
+		/**
+		 * SMSYSTEM_开头的parameter只有在初始化页面才能输入，修改都不保存，所以在parameter EDIT时要做条件判断
+		 */
+		a.add(new String[]{"SMSYSTEM_USER_QUANTITY","String","50"});
 		
 		return a;
     }
