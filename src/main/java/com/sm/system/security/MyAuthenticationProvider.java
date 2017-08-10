@@ -1,6 +1,7 @@
 package com.sm.system.security;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Component;
 
 import com.sm.system.domain.user.MyUserDetails;
 import com.sm.system.service.user.MyUserDetailsService;
+import com.sm.system.util.SystemUtil;
 
 @Component
 public class MyAuthenticationProvider implements AuthenticationProvider {
@@ -41,7 +43,7 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
         if (!password.equals(user.getPassword())) {
             throw new BadCredentialsException("Wrong password.");
         }
-
+        
         Collection<? extends GrantedAuthority> authorities = user.getAuthorities();
         return new UsernamePasswordAuthenticationToken(user, password, authorities);
     }

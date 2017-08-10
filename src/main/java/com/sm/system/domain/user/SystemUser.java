@@ -36,6 +36,8 @@ public class SystemUser implements Serializable{
 
     private String username;
     private String password;
+    
+    private String expired;
 
     public SystemUser(){}
 
@@ -64,5 +66,13 @@ public class SystemUser implements Serializable{
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getExpired() {
+		return this.expired;
+	}
+
+	public void setExpired(String expired) {
+		this.expired = expired;
 	}
 }

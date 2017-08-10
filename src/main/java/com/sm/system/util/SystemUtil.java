@@ -1,9 +1,16 @@
 package com.sm.system.util;
 
+import java.security.InvalidKeyException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
 
 public class SystemUtil {
 
@@ -71,5 +78,31 @@ public class SystemUtil {
     		return true;
     	}
     	return false;
+    }
+    
+    /**
+     * 加密
+     * @param key
+     * @return
+     * @throws Exception
+     */
+    public static String desEncrypt(String key) throws Exception {
+    	Aes des = new Aes("sming"); //自定义密钥
+    	System.out.println("加密后的字符：" + des.encrypt(key));
+    	key = des.encrypt(key);
+    	return key;
+    }
+    
+    /**
+     * 解密
+     * @param key
+     * @return
+     * @throws Exception
+     */
+    public static String desDecrypt(String key) throws Exception {
+    	Aes des = new Aes("sming"); //自定义密钥
+    	System.out.println("解密后的字符：" + des.decrypt(key));
+    	key = des.decrypt(key);
+    	return key;
     }
 }

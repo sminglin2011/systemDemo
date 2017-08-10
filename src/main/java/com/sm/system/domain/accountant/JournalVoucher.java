@@ -28,7 +28,11 @@ public class JournalVoucher implements Serializable{
 	
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date date;
+	private String debitDescription;
+	private Integer debitLedger;
 	private Double debitAmount;
+	private String creditDescription;
+	private Integer creditLedger;
 	private Double creditAmount;
 	private String comments;
 	@OneToMany(mappedBy="journalVoucher", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
@@ -95,5 +99,29 @@ public class JournalVoucher implements Serializable{
 	}
 	public void setVoucherNo(String voucherNo) {
 		this.voucherNo = voucherNo;
+	}
+	public String getDebitDescription() {
+		return this.debitDescription;
+	}
+	public void setDebitDescription(String debitDescription) {
+		this.debitDescription = debitDescription;
+	}
+	public Integer getDebitLedger() {
+		return this.debitLedger;
+	}
+	public void setDebitLedger(Integer debitLedger) {
+		this.debitLedger = debitLedger;
+	}
+	public String getCreditDescription() {
+		return this.creditDescription;
+	}
+	public void setCreditDescription(String creditDescription) {
+		this.creditDescription = creditDescription;
+	}
+	public Integer getCreditLedger() {
+		return this.creditLedger;
+	}
+	public void setCreditLedger(Integer creditLedger) {
+		this.creditLedger = creditLedger;
 	}
 }
