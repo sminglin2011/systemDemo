@@ -25,24 +25,20 @@
 </head>
 <body>
 <article class="page-container">
-	<form class="form form-horizontal" id="form-add-preSetRemark">
+	<form class="form form-horizontal" id="form">
 	<div class="row cl">
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>UserName：</label>
 		<div class="formControls col-xs-8 col-sm-9">
-			<input type="hidden" class="input-text" th:value="${user.userId}" id="userId" name="userId"></input>
-			<input type="text" class="input-text" th:value="${user.username}" placeholder="UserName" id="username" name="username"></input>
+			<input type="hidden" class="input-text" th:field="${user.id}" />
+			<input type="text" class="input-text" th:field="${user.username}" placeholder="UserName" />
 		</div>
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>Email：</label>
 		<div class="formControls col-xs-8 col-sm-9">
-			<input type="text" class="input-text" th:value="${user.email}" placeholder="Email" id="email" name="email"></input>
+			<input type="text" class="input-text" th:field="${user.email}" placeholder="Email" />
 		</div>
 		<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>Password：</label>
 		<div class="formControls col-xs-8 col-sm-9">
-			<input type="password" class="input-text" th:value="${user.password}" placeholder="Password" id="password" name="password"></input>
-		</div>
-		<label class="form-label col-xs-4 col-sm-3">Join Date：</label>
-		<div class="formControls col-xs-8 col-sm-9">
-			<input type="text" class="input-text" th:value="${user.joinDate}" onfocus="WdatePicker()" placeholder="2017-07-01" id="joinDate" name="joinDate"></input>
+			<input type="password" class="input-text" th:field="${user.password}" placeholder="Password" />
 		</div>
 	</div>
 	
@@ -68,7 +64,7 @@
 <script type="text/javascript">
 $(function(){
 	
-	$("#form-add-preSetRemark").validate({
+	$("#form").validate({
 		rules:{
 			username:{
 				required:true,
@@ -90,16 +86,15 @@ $(function(){
 			$(form).ajaxSubmit({
 				type: 'post',
 				url: "/user/saveUser" ,
-				dataType: 'json',
 				success: function(data){
-					console.log(data);
-					if(data.result) {
-						layer.msg('添加成功!',{icon:1,time:1000}, function(){
+					console.log("data", data);
+					if(data.code == 101) { // 101 ajax error
+						layer.msg(data.message, {icon: 2, time:3000}, function(){layer_close();}); 
+					}else {
+						layer.msg("Successful", {icon:1, time:1000}, function(){
 							parent.$('#btn-refresh').click();
 							layer_close();
 						});
-					} else {
-						layer.msg(data.msg,{icon:2,time:1000});
 					}
 				},
                 error: function(XmlHttpRequest, textStatus, errorThrown){

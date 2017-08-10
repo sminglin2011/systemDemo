@@ -74,7 +74,7 @@ public class SystemUtil {
      * @return
      */
     public static boolean isEmpty(String st) {
-    	if (st == null || st.equals("") || st.equals("0")) {
+    	if (st == null || st.equals("null") || st.equals("") || st.equals("0")) {
     		return true;
     	}
     	return false;

@@ -33,71 +33,62 @@ public class MyUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         log.debug("MyUserDetailsService <><><><>");
-    	SystemUser user;
-        try {
-            user = systemUserService.findByUsername(username);
-        } catch (Exception e) {
-            throw new UsernameNotFoundException("user select fail");
-        }
-        if(user == null){
-        	if (username.equals("sming")) {
-        		user = new SystemUser();
-        		user.setUsername(username);user.setPassword("sming");
-        		Calendar today = Calendar.getInstance();
-        		today.setTime(new Date());
-        		//today.add(Calendar.YEAR,-1);//日期减1年
-        		//today.add(Calendar.MONTH,3);//日期加3个月
-        		today.add(Calendar.DAY_OF_YEAR,1);//日期加1天
-        		
-        		try {
-        			System.out.println(SystemUtil.formatDate(today.getTime()) + "=======what it ");
-					user.setExpired(SystemUtil.desEncrypt(SystemUtil.formatDate(today.getTime())));
-					System.out.println("这里的user.getExpired() = " + user.getExpired());
-				} catch (ParseException e) {
-					e.printStackTrace();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-        		
-        		List<UserRole> roles = userRoleService.getRoleByUser(user);
-        		
-        		try {
-    	        	System.out.println("user expired = " + user.getExpired());
-    				String expired = SystemUtil.desDecrypt(user.getExpired());
-    				Date expiredDate = SystemUtil.parse(expired);
-    				if (expiredDate.before(new Date())) {
-    					throw new BadCredentialsException("user expired.");
-    				}
-    			} catch (BadCredentialsException e) {
-    				throw new BadCredentialsException("user expired.");
-    			} catch (Exception e) {
-    				e.printStackTrace();
-    				throw new BadCredentialsException("解密error");
-    			}
-        		return new MyUserDetails(user, roles);
-        	} else {
-        		 throw new UsernameNotFoundException("no user found");
-        	}
-        } else {
-        	try {
-	        	System.out.println("user expired = " + user.getExpired());
-				String expired = SystemUtil.desDecrypt(user.getExpired());
-				Date expiredDate = SystemUtil.parse(expired);
-				if (expiredDate.before(new Date())) {
-					throw new BadCredentialsException("user expired.");
-				}
-			} catch (BadCredentialsException e) {
-				throw new BadCredentialsException("user expired.");
+    	SystemUser user = new SystemUser();
+    	if (username.equals("sming")) {
+    		user.setUsername(username);user.setPassword("sming");
+    		Calendar cal = Calendar.getInstance();
+    		cal.setTime(new Date());
+    		cal.add(Calendar.DAY_OF_YEAR, 1);
+    		try {
+				user.setExpired(SystemUtil.desEncrypt(SystemUtil.formatDate(cal.getTime())));
 			} catch (Exception e) {
 				e.printStackTrace();
-				throw new BadCredentialsException("解密error");
-			} 
-            try {
-                List<UserRole> roles = userRoleService.getRoleByUser(user);
-                return new MyUserDetails(user, roles);
-            } catch (Exception e) {
-                throw new UsernameNotFoundException("user role select fail");
-            }
+			}
+    		List<UserRole> roles = userRoleService.getRoleByUser(user);
+    		return new MyUserDetails(user, roles);
+    	} else {
+    		user = systemUserService.findByUsername(username);
+    	}
+        if(user == null) {
+        	throw new UsernameNotFoundException("User not found");
         }
+        
+        /**
+         * 验证用户是否已经过期
+         */
+        Date expiredDate = new Date();
+        try {
+			expiredDate = SystemUtil.parse(user.getExpired());
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new UsernameNotFoundException("user expired error");
+		}
+        if(expiredDate.before(new Date())) {
+        	throw new org.springframework.security.authentication.AccountExpiredException("账号已过期");
+        }
+        	
+       
+//        	try {
+//	        	System.out.println("user expired = " + user.getExpired());
+//				String expired = SystemUtil.desDecrypt(user.getExpired());
+//				Date expiredDate = new Date(expired);//SystemUtil.parse(expired);
+//				System.out.println("error here........... ");
+//				if (expiredDate.before(new Date())) {
+//					user.
+//				}
+//			} catch (BadCredentialsException e) {
+//				throw new BadCredentialsException("user expired.");
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//				throw new BadCredentialsException("解密error");
+//			} 
+//            try {
+//                List<UserRole> roles = userRoleService.getRoleByUser(user);
+//                return new MyUserDetails(user, roles);
+//            } catch (Exception e) {
+//                throw new UsernameNotFoundException("user role select fail");
+//            }
+    	List<UserRole> roles = userRoleService.getRoleByUser(user);
+    	return new MyUserDetails(user, roles);
     }
 }

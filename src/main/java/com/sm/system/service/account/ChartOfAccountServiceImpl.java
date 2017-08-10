@@ -59,6 +59,7 @@ public class ChartOfAccountServiceImpl implements ChartOfAccountService {
 	@Override
 	public ChartOfAccount findOne(String id) {
 		ChartOfAccount coa = repository.findOne(Integer.valueOf(id));
+		if (coa == null)  coa = new ChartOfAccount(); 
 		return coa;
 	}
 

@@ -9,7 +9,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 public class MyUserDetails extends SystemUser implements UserDetails{
 
-    private List<UserRole> roles;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private List<UserRole> roles;
 
     public MyUserDetails(SystemUser user, List<UserRole> roles){
         super(user);
