@@ -92,14 +92,35 @@ function _add(title,url){
 }
 /*延期*/
 function _extend(){
-	layer.prompt({
-		  formType: 1, //输入框类型，支持0（文本）默认1（密码）2（多行文本）
-		  value: 'Password',
-		  title: '请输入密码'
-		 // area: ['800px', '350px'] //自定义文本域宽高
-		}, function(value, index, elem){
-		  layer.close(index);
-		});
+	var ids='';
+	$("input[name='id']:checked").each(function () {
+        ids = ids + this.value + ",";
+    });
+	ids = ids.substring(0, ids.length-1)
+	console.log(ids, "ids1");
+	if(ids.length == 0) {
+		layer.msg("Please select extend user", {icon: 2, time:5000}); 
+	} else {
+		layer.prompt({
+			  formType: 1, //输入框类型，支持0（文本）默认1（密码）2（多行文本）
+			  value: '',
+			  title: '请输入密码'
+			 // area: ['800px', '350px'] //自定义文本域宽高
+			}, function(value, index, elem){
+				$.post("extendUser", {ids:ids,value:value}, function(data, textStatus, jqXHR){
+					if(data.code == 101) { // 101 ajax error
+						layer.msg(data.message, {icon: 2, time:3000}, function(){layer.close(index)}); 
+					}else {
+						layer.msg("Successful", {icon:1, time:1000}, function(){
+							refresh();layer.close(index);
+						});
+					}
+				})
+				.error(function() { alert("error"); })
+			    .complete(function(event,xhr,options) { console.log(xhr)});
+			});
+	}
+	
 }
 /*初始化系统默认char of account*/
 function _initCOA(){

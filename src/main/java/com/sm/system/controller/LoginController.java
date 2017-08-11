@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.sm.system.service.parameter.ParameterService;
 
@@ -16,7 +17,7 @@ public class LoginController {
 	@Resource(name="ParameterServiceImpl")
 	private ParameterService parameterSvc;
 	
-	@RequestMapping(value="/login")
+	@RequestMapping(value="/login", method = RequestMethod.GET)
 	private String login() {
 		log.debug("login debug");
 		return "login";

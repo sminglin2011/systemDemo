@@ -51,4 +51,12 @@ public class UserController {
 		log.debug("..........come in save user end...... ");
 		return "ok";
 	}
+	
+	@RequestMapping("/user/extendUser")
+	@ResponseBody
+	private String extendUser(Model model, String ids, String value) throws MyException{
+		log.debug("..........come in extend user...... ");
+		log.debug("..........come in extend user end...... ");
+		return "ok";
+	}
 }

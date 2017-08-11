@@ -92,10 +92,10 @@ function refresh(){
 /*添加 or 编辑*/
 function _add(obj, title, id){
 	layer.prompt({
-		  formType: 0, //输入框类型，支持0（文本）默认1（密码）2（多行文本）
-		  value: '初始值',
-		  title: title,
-		  area: ['400px', '180px'] //自定义文本域宽高
+		  formType: 1, //输入框类型，支持0（文本）默认1（密码）2（多行文本）
+		  //value: '初始值',
+		  title: title
+		 // area: ['400px', '180px'] //自定义文本域宽高
 		}, function(value, index, elem){
 			console.log(value, "=value");
 			//$.post(url,data,success(data, textStatus, jqXHR),dataType)

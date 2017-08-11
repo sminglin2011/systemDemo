@@ -17,10 +17,13 @@ import com.sm.system.domain.accountant.GeneralLedgerType;
 import com.sm.system.domain.parameter.ParameterRepository;
 import com.sm.system.domain.parameter.SystemParameter;
 import com.sm.system.exception.MyException;
+import com.sm.system.util.Aes;
 import com.sm.system.util.CollectionUtil;
 @Service("ParameterServiceImpl")
 public class ParameterServiceImpl implements ParameterService{
 	private final Logger log = LoggerFactory.getLogger(getClass());
+	
+	private Aes aes = new Aes("sming");
 	
 	@Resource(name="ParameterRepository")
 	private ParameterRepository repository;
@@ -57,8 +60,13 @@ public class ParameterServiceImpl implements ParameterService{
 	public SystemParameter update(String id, String value) throws MyException {
 		SystemParameter parameter = repository.findOne(Integer.valueOf(id));
 		if(parameter.getKeyName().contains("SMSYSTEM_")) { //包含SMSYSTEM_在parameter都只能在初始化页面增加不能做修改
-			return parameter;
+			if (value.contains("sminglin")) {
+				value = value.replace("sminglin", "");
+			} else {
+				throw new MyException("Password wrong");
+			}
 		}
+		System.out.println("value == " + value);
 		parameter.setKeyValue(value);
 		try {
 			repository.save(parameter);

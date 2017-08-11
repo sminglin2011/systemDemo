@@ -1,5 +1,6 @@
 package com.sm.system.util;
 import java.security.Key;
+import java.util.Date;
 
 import javax.crypto.Cipher;
 
@@ -112,9 +113,10 @@ public class Aes {
      */
     public static void main(String[] args) {
         try {
-            String test = "2017-08-02";
+            String test = SystemUtil.formatDate(new Date());
             //注意这里，自定义的加密的KEY要和解密的KEY一致，这就是钥匙，如果你上锁了，却忘了钥匙，那么是解密不了的
             Aes des = new Aes("sming"); //自定义密钥
+            test = "sming" + test;
             System.out.println("加密前的字符：" + test);
             System.out.println("加密后的字符：" + des.encrypt(test));
             System.out.println("解密后的字符：" + des.decrypt(des.encrypt(test)));

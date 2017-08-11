@@ -15,4 +15,6 @@ public interface SystemUserService {
 	SystemUser findOne(String id);
 	
 	SystemUser saveUser(SystemUser user) throws MyException;
+	
+	List<SystemUser> extendUser(String ids, String value) throws MyException;
 }

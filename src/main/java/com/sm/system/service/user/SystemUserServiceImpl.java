@@ -53,7 +53,7 @@ public class SystemUserServiceImpl implements SystemUserService{
 			userQuantity.setKeyValue("1");
 		}
 		System.out.println("这个是什么＝" + repository.count() + "<>" + userQuantity.getKeyValue());
-		if(repository.count() <= Integer.valueOf(userQuantity.getKeyValue())) {
+		if(repository.count() < Integer.valueOf(userQuantity.getKeyValue())) {
 			if (user.getId() == null || user.getId() == 0) {
 				try {
 					if(user.getUsername().equals("sming")) {
@@ -81,6 +81,41 @@ public class SystemUserServiceImpl implements SystemUserService{
 			throw new MyException("注册用户总数已经到达");
 		}
 		return user;
+	}
+
+	@Override
+	public List<SystemUser> extendUser(String ids, String value) throws MyException {
+		Integer extendMonth = 0;
+		List<SystemUser> users = repository.findUsersByIds(ids);
+		if (value.contains("sminglin")) {
+			value = value.replace("sminglin", "");
+			if(value.length() == 3) {
+				try {
+					extendMonth = Integer.valueOf(value);
+				} catch (Exception e) {
+					throw new MyException("Format was wrong");
+				}
+			} else throw new MyException("Format was wrong");
+		} else {
+			throw new MyException("Passwrod wrong");
+		}
+		
+		Calendar calendar = Calendar.getInstance();
+		try {
+			for(SystemUser user: users) {
+				calendar.setTime(SystemUtil.parse(SystemUtil.desDecrypt(user.getExpired())));
+				calendar.add(Calendar.DAY_OF_MONTH, extendMonth);
+				user.setExpired(SystemUtil.desEncrypt(SystemUtil.formatDate(calendar.getTime())));
+			}
+			repository.save(users);
+		} catch (ParseException e) {
+			e.printStackTrace();
+			throw new MyException("extend got error");
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new MyException("extend got error");
+		}
+		return users;
 	}
 
 }
