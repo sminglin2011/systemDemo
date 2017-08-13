@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.sm.system.domain.customer.Customer;
+import com.sm.system.domain.contact.ContactMaster;
 
 @Entity
 public class ReceiptVoucher implements Serializable{
@@ -26,7 +26,7 @@ public class ReceiptVoucher implements Serializable{
 	private Date date;
 	@ManyToOne
 	@JoinColumn(name="customer_id")
-	private Customer customer;
+	private ContactMaster customer;
 	private String paymentType;
 	private String bank;
 	private String referrence;
@@ -45,10 +45,10 @@ public class ReceiptVoucher implements Serializable{
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public Customer getCustomer() {
+	public ContactMaster getCustomer() {
 		return this.customer;
 	}
-	public void setCustomer(Customer customer) {
+	public void setCustomer(ContactMaster customer) {
 		this.customer = customer;
 	}
 	public String getPaymentType() {

@@ -101,8 +101,8 @@ public class SystemUtil {
      */
     public static String desDecrypt(String key) throws Exception {
     	Aes des = new Aes("sming"); //自定义密钥
-    	System.out.println("解密后的字符：" + des.decrypt(key));
     	key = des.decrypt(key);
-    	return key;
+    	System.out.println("解密后的字符：" + key);
+    	return key.toString();
     }
 }

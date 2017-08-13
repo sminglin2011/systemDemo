@@ -27,70 +27,16 @@
 <title></title>
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> Home <span class="c-gray en">&gt;</span> Journal Voucher Master  <a id="btn-refresh" class="btn btn-success radius r " style="line-height:1.6em;margin-top:3px" onclick="refresh()" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> Home <span class="c-gray en">&gt;</span> Account Receivable Master  <a id="btn-refresh" class="btn btn-success radius r " style="line-height:1.6em;margin-top:3px" onclick="refresh()" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
 	<div class="text-c">
-		<form class="form form-horizontal" id="form">
-		<div class="row cl">
-			<label class="form-label col-xs-2 col-sm-2"><span class="c-blue">Date:</span></label>
-			<div class="formControls col-xs-2 col-sm-2">
-				<input type="text" class="input-text" onfocus="WdatePicker()" />
-			</div>
-		</div>
-		<div class="row cl">
-			<label class="form-label col-xs-2 col-sm-2"><span class="c-blue">Debit:</span></label>
-			<div class="formControls col-xs-2 col-sm-2">
-				<div class="dropDown dropDown_hover"><a href="javascript:;" class="btn btn-warning radius"> Contra <i class="Hui-iconfont">&#xe6d5;</i></a>
-					<ul class="dropDown-menu menu radius box-shadow">
-							<li><a href="javascript:;" onclick="article_add('添加资讯','article-add.html')"><i class="Hui-iconfont">&#xe616;</i> 资讯</a></li>
-							<li><a href="javascript:;" onclick="picture_add('添加资讯','picture-add.html')"><i class="Hui-iconfont">&#xe613;</i> 图片</a></li>
-							<li><a href="javascript:;" onclick="product_add('添加资讯','product-add.html')"><i class="Hui-iconfont">&#xe620;</i> 产品</a></li>
-							<li><a href="javascript:;" onclick="member_add('添加用户','member-add.html','','510')"><i class="Hui-iconfont">&#xe60d;</i> 用户</a></li>
-					</ul>
-				</div>
-			</div>
-			<div class="formControls col-xs-2 col-sm-2">
-				<input type="text" class="input-text disabled"  readonly="readonly" placeholder="Ledger" />
-			</div>
-			<div class="formControls col-xs-2 col-sm-2">
-				<input type="text" class="input-text" />
-			</div>
-		</div>
-		
-		<div class="row cl">
-			<label class="form-label col-xs-2 col-sm-2"><span class="c-blue">Credit:</span></label>
-			<div class="formControls col-xs-2 col-sm-2">
-				<div class="dropDown dropDown_hover"><a href="javascript:;" class="btn btn-warning radius"> Contra <i class="Hui-iconfont">&#xe6d5;</i></a>
-						<ul class="dropDown-menu menu radius box-shadow">
-							<li><a href="javascript:;" onclick="article_add('添加资讯','article-add.html')"><i class="Hui-iconfont">&#xe616;</i> 资讯</a></li>
-							<li><a href="javascript:;" onclick="picture_add('添加资讯','picture-add.html')"><i class="Hui-iconfont">&#xe613;</i> 图片</a></li>
-							<li><a href="javascript:;" onclick="product_add('添加资讯','product-add.html')"><i class="Hui-iconfont">&#xe620;</i> 产品</a></li>
-							<li><a href="javascript:;" onclick="member_add('添加用户','member-add.html','','510')"><i class="Hui-iconfont">&#xe60d;</i> 用户</a></li>
-					</ul>
-				</div>
-			</div>
-			<div class="formControls col-xs-2 col-sm-2">
-				<input type="text" class="input-text disabled"  readonly="readonly" placeholder="Ledger" />
-			</div>
-			<div class="formControls col-xs-2 col-sm-2">
-				<input type="text" class="input-text" />
-			</div>
-			
-			<div class="formControls col-xs-2 col-sm-2">
-				<input class="btn btn-primary radius" type="submit" value="&nbsp;Save&nbsp;"/>
-			</div>
-		</div>
-			
-		</form>
 	</div>
 	<div class="mt-20 line"></div>
-	<!-- 
 	<div class="cl pd-5 bg-1 bk-gray mt-20"> 
 		<span class="l">
 		<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> Delete</a> 
-		<a href="javascript:;" onclick="_add('Add','journalVoucherAdd?id=0')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> Add</a>
+		<a href="javascript:;" onclick="_add('Add','accountReceivableAdd?id=0')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> Add</a>
 		</span> <span class="r"></span> </div>
-	 -->
 	<div class="mt-20">
 		<table id="table" class="table table-border table-bordered table-bg table-hover table-sort table-responsive">
 			<thead>
@@ -99,22 +45,22 @@
 					<th width="30">ID</th>
 					<th>VoucherNumber</th>
 					<th>Date</th>
-					<th>DebitAmount</th>
-					<th>CreditAmount</th>
+					<th>Client</th>
+					<th>Amount</th>
 					<th>Operation</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr class="text-c" th:each="jv : ${list}"> 
-				     <td><input type="checkbox" th:value="${jv.id}" name="id"></input></td>
-				     <td th:text="${jv.id}">id</td>
-				     <td th:text="${jv.voucherNo}">voucherNo</td>
-				     <td th:text="${#dates.format(jv.date,'yyyy-MM-dd')}">Date</td>
-				     <td th:text="${jv.debitAmount}">debitAmount</td>
-				     <td th:text="${jv.creditAmount}">creditAmount</td>
+				<tr class="text-c" th:each="ar : ${list}"> 
+				     <td><input type="checkbox" th:value="${ar.id}" name="id"></input></td>
+				     <td th:text="${ar.id}">id</td>
+				     <td th:text="${ar.voucherNo}">voucherNo</td>
+				     <td th:text="${#dates.format(ar.date,'yyyy-MM-dd')}">Date</td>
+				     <td th:text="${ar.id}">debitAmount</td>
+				     <td th:text="${ar.id}">creditAmount</td>
 				     <td class="f-14 td-manage">
-				     <a style="text-decoration:none" class="ml-5" th:onclick="'javascript:_add(\'Edit\',\'chartOfAccountAdd?id='+${jv.id}+'\');'" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> 
-				     <a style="text-decoration:none" class="ml-5" th:onclick="'javascript:_del(this,'+${jv.id}+');'" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a>
+				     <a style="text-decoration:none" class="ml-5" th:onclick="'javascript:_add(\'Edit\',\'chartOfAccountAdd?id='+${ar.id}+'\');'" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> 
+				     <a style="text-decoration:none" class="ml-5" th:onclick="'javascript:_del(this,'+${ar.id}+');'" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a>
 				     </td>
 				 </tr>
 			</tbody>

@@ -56,6 +56,7 @@ public class UserController {
 	@ResponseBody
 	private String extendUser(Model model, String ids, String value) throws MyException{
 		log.debug("..........come in extend user...... ");
+		userSvc.extendUser(ids, value);
 		log.debug("..........come in extend user end...... ");
 		return "ok";
 	}

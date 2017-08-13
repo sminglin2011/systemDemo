@@ -17,7 +17,7 @@ import javax.persistence.OneToMany;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.sm.system.domain.customer.Customer;
+import com.sm.system.domain.contact.ContactMaster;
 
 @Entity
 public class Invoice implements Serializable{
@@ -30,7 +30,7 @@ public class Invoice implements Serializable{
 	private String docType; // invoice or debit note
 	@ManyToOne
 	@JoinColumn(name="customer_id")
-	private Customer customer;
+	private ContactMaster customer;
 //	private DeliveryAddress deliveryAddress;
 	private String attention;
 	private String Address;
@@ -69,10 +69,10 @@ public class Invoice implements Serializable{
 	public void setDocType(String docType) {
 		this.docType = docType;
 	}
-	public Customer getCustomer() {
+	public ContactMaster getCustomer() {
 		return this.customer;
 	}
-	public void setCustomer(Customer customer) {
+	public void setCustomer(ContactMaster customer) {
 		this.customer = customer;
 	}
 	public String getAttention() {

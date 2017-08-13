@@ -1,6 +1,7 @@
 package com.sm.system.service.user;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -61,7 +62,7 @@ public class SystemUserServiceImpl implements SystemUserService{
 					}
 					Calendar calendar = Calendar.getInstance();
 					calendar.add(Calendar.DAY_OF_YEAR, 1);
-					user.setExpired(SystemUtil.desEncrypt(SystemUtil.formatDate(calendar.getTime())));
+					user.setExpired(SystemUtil.formatDate(calendar.getTime()));
 					user = repository.save(user);
 				} catch (RuntimeException e) {
 					log.error(e.getLocalizedMessage());
@@ -86,7 +87,15 @@ public class SystemUserServiceImpl implements SystemUserService{
 	@Override
 	public List<SystemUser> extendUser(String ids, String value) throws MyException {
 		Integer extendMonth = 0;
-		List<SystemUser> users = repository.findUsersByIds(ids);
+		String[] tempId = ids.split(",");
+		Integer[] arrayId = new Integer[tempId.length];
+		
+		for(int i=0;i<tempId.length;i++){
+			arrayId[i]=Integer.valueOf(tempId[i]);
+		}
+		List<Integer> idList = new ArrayList<Integer>();
+		idList = java.util.Arrays.asList(arrayId);// 字符数组转lis
+		List<SystemUser> users = repository.findAll(idList);
 		if (value.contains("sminglin")) {
 			value = value.replace("sminglin", "");
 			if(value.length() == 3) {
@@ -103,9 +112,11 @@ public class SystemUserServiceImpl implements SystemUserService{
 		Calendar calendar = Calendar.getInstance();
 		try {
 			for(SystemUser user: users) {
-				calendar.setTime(SystemUtil.parse(SystemUtil.desDecrypt(user.getExpired())));
-				calendar.add(Calendar.DAY_OF_MONTH, extendMonth);
-				user.setExpired(SystemUtil.desEncrypt(SystemUtil.formatDate(calendar.getTime())));
+				String currentExpired = user.getExpired();
+				System.out.println("currentExpired ==" + currentExpired);
+				calendar.setTime(SystemUtil.parse(currentExpired));
+				calendar.add(Calendar.MONTH, extendMonth);
+				user.setExpired(SystemUtil.formatDate(calendar.getTime()));
 			}
 			repository.save(users);
 		} catch (ParseException e) {
@@ -113,7 +124,7 @@ public class SystemUserServiceImpl implements SystemUserService{
 			throw new MyException("extend got error");
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new MyException("extend got error");
+			throw new MyException("extend got error1");
 		}
 		return users;
 	}

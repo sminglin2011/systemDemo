@@ -37,6 +37,7 @@ public class JournalVoucher implements Serializable{
 	private String comments;
 	@OneToMany(mappedBy="journalVoucher", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
 	private List<JournalVoucherItem> items = new ArrayList<>(); 
+	private Boolean blocked;
 	
 	public Integer getId() {
 		return this.id;
@@ -123,5 +124,11 @@ public class JournalVoucher implements Serializable{
 	}
 	public void setCreditLedger(Integer creditLedger) {
 		this.creditLedger = creditLedger;
+	}
+	public Boolean getBlocked() {
+		return blocked;
+	}
+	public void setBlocked(Boolean blocked) {
+		this.blocked = blocked;
 	}
 }

@@ -87,6 +87,14 @@ public class SystemUser implements Serializable{
 	}
 
 	public void setExpired(String expired) {
+		if (!SystemUtil.isEmpty(expired)) {
+			try {
+				expired = SystemUtil.desEncrypt(expired);
+			} catch (Exception e) {
+				System.out.println("这里错了1");
+				e.printStackTrace();
+			}
+		}
 		this.expired = expired;
 	}
 

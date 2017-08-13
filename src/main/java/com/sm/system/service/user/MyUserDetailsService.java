@@ -1,6 +1,5 @@
 package com.sm.system.service.user;
 
-import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -9,7 +8,6 @@ import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -40,7 +38,7 @@ public class MyUserDetailsService implements UserDetailsService {
     		cal.setTime(new Date());
     		cal.add(Calendar.DAY_OF_YEAR, 1);
     		try {
-				user.setExpired(SystemUtil.desEncrypt(SystemUtil.formatDate(cal.getTime())));
+				user.setExpired(SystemUtil.formatDate(cal.getTime()));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"></meta>
+<meta name="renderer" content="webkit|ie-comp|ie-stand"></meta>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"></meta>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"></meta>
+<meta http-equiv="Cache-Control" content="no-siteapp"></meta>
+<link rel="Bookmark" href="/H-ui-admin-v3/favicon.ico" />
+<link rel="Shortcut Icon" href="/H-ui-admin-v3/favicon.ico" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="/H-ui-admin-v3/lib/html5shiv.js"></script>
+<script type="text/javascript" src="/H-ui-admin-v3/lib/respond.min.js"></script>
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="/H-ui-admin-v3/static/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="/H-ui-admin-v3/static/h-ui.admin/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css" href="/H-ui-admin-v3/lib/Hui-iconfont/1.0.8/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="/H-ui-admin-v3/static/h-ui.admin/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css" href="/H-ui-admin-v3/static/h-ui.admin/css/style.css" />
+<style type="text/css">
+.docs-example:after{content: "Details";position: absolute;top: -1px;left: -1px;*position:static;padding: 3px 7px;font-size: 12px;font-weight: bold;background-color: #f5f5f5;border: 1px solid #ddd;color: #9da0a4;border-radius: 4px 0 4px 0}
+</style>
+<!--[if IE 6]>
+<script type="text/javascript" src="/H-ui-admin-v3/lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+<title></title>
+</head>
+<body>
+<article class="page-container">
+	<form class="form form-horizontal" id="form">
+	<div class="row cl">
+		<label class="form-label col-xs-2 col-sm-2"><span class="c-blue">Voucher No.:</span></label>
+		<div class="formControls col-xs-4 col-sm-2">
+			<input type="hidden" class="input-text" th:field="*{ar.id}" />
+			<input type="text" class="input-text disabled" th:field="*{ar.voucherNo}" readonly="readonly" placeholder="Voucher Number" />
+		</div>
+		
+		<label class="form-label col-xs-2 col-sm-2"><span class="c-blue">Date:</span></label>
+		<div class="formControls col-xs-2 col-sm-2">
+			<input type="text" class="input-text" th:field="*{ar.date}" onfocus="WdatePicker()" />
+		</div>
+	</div>
+	
+	<div class="row cl">
+		<label class="form-label col-xs-2 col-sm-2">
+				<input type="button" class="btn btn-primary-outline radius" value="Client" onclick="clientSelection();"></input>
+				<input type="hidden" th:field="*{ar.client.id}" id="id" name="id"></input>
+		</label>
+		<div class="formControls col-xs-4 col-sm-2">
+			<input type="text" class="input-text" th:field="*{ar.id}" placeholder="Client Name" />
+		</div>
+		
+	</div>
+	
+	<div class="row cl">
+		<label class="form-label col-xs-2 col-sm-2"><span class="c-blue">Comments:</span></label>
+		<div class="formControls col-xs-9 col-sm-9">
+			<input type="text" class="input-text" th:field="*{ar.comments}" placeholder="Comments" />
+		</div>
+	</div>
+	
+	<div class="codeView docs-example">
+	<div class="row cl">
+		<label class="form-label col-xs-2 col-sm-2">
+			<a class="btn btn-primary-outline radius" value="Reference" onclick="clientSelection();">Reference</a>
+		</label>
+		
+		<div class="formControls col-xs-2 col-sm-2">
+			<input type="text" class="input-text disabled" readonly="readonly" th:field="*{ar.items[0].ledgerCode}" placeholder="LedgerCode"/>
+		</div>
+		<div class="formControls col-xs-2 col-sm-2">
+			<input type="text" class="input-text" th:field="*{ar.items[0].valueBase}" placeholder="Description"/>
+		</div>
+		<div class="formControls col-xs-1 col-sm-1">
+			<input type="text" class="input-text" th:field="*{ar.items[0].valueBase}" placeholder="Quantity"/>
+		</div>
+		<div class="formControls col-xs-1 col-sm-1">
+			<input type="text" class="input-text" th:field="*{ar.items[0].valueBase}" placeholder="UnitPrice"/>
+		</div>
+		<div class="formControls col-xs-1 col-sm-1">
+			<input type="text" class="input-text" th:field="*{ar.items[0].valueBase}" placeholder="% Discount"/>
+		</div>
+		<div class="formControls col-xs-2 col-sm-2">
+			<input type="text" class="input-text" th:field="*{ar.items[0].valueBase}" placeholder="Amount"/>
+		</div>
+	</div>
+	
+	</div>
+	
+	<div class="row cl">
+		<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+			<!-- <input class="btn btn-primary radius" type="submit" value="&nbsp;Save&nbsp;"></input> -->
+			<div class="btn-group">
+			  <input class="btn btn-primary radius" type="submit" value="&nbsp;Save&nbsp;"/>
+			</div>
+		</div>
+	</div>
+	</form>
+</article>
+
+<!--_footer 作为公共模版分离出去--> 
+<script type="text/javascript" src="/H-ui-admin-v3/lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="/H-ui-admin-v3/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="/H-ui-admin-v3/static/h-ui/js/H-ui.min.js"></script> 
+<script type="text/javascript" src="/H-ui-admin-v3/static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/H-ui-admin-v3/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="/H-ui-admin-v3/lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
+<script type="text/javascript" src="/H-ui-admin-v3/lib/jquery.validation/1.14.0/validate-methods.js"></script> 
+<script type="text/javascript" src="/H-ui-admin-v3/lib/jquery.validation/1.14.0/messages_zh.js"></script> 
+<script type="text/javascript">
+$(function(){
+	
+	$("#form").validate({
+		rules:{
+			date:{
+				required:true,
+			},
+		},
+		onkeyup:false,
+		focusCleanup:true,
+		success:"valid",
+		submitHandler:function(form){
+			$(form).ajaxSubmit({
+				type: 'post',
+				url: "journalVoucherSave" ,
+				/* dataType: 'json', */
+				success: function(data){
+					console.log(data);
+					if(data.code == 101) { // 101 ajax error
+						layer.msg(data.message, {icon: 2, time:5000}, function(){layer.close(index)}); 
+					}else {
+						layer.msg("Successful", {icon:1, time:1000}, function(){
+							parent.$('#btn-refresh').click();layer_close();
+						});
+					}
+				},
+                error: function(XmlHttpRequest){
+                	console.log('ajax error', XmlHttpRequest);
+                	var xhr = XmlHttpRequest;
+                	if(xhr.statusText="parsererror") {
+                		$("body").html(xhr.responseText);
+                	}else {
+						layer.msg("ajax error",{icon:2,time:5000});
+                	}
+				},
+				complete: function(xhr) { 
+					console.log(xhr, "complete........");
+				}
+			});
+			
+		}
+	});
+});
+</script> 
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>
